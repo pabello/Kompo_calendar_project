@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class addEventView extends JFrame{
+public class AddEventView extends JFrame{
 
 	
 	  /**
@@ -25,7 +25,7 @@ public class addEventView extends JFrame{
 	private InputPanel inptPanel;
 	public static EventList events;
 	
-	public addEventView() {
+	public AddEventView() {
 			super("Add Event");
 			events = new EventList();
 	        System.out.println("Created GUI on EDT? "+
@@ -73,7 +73,7 @@ public class addEventView extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO dispose on pressing
-					addEventView.this.dispose();
+					AddEventView.this.dispose();
 				}
 	        	
 	        });

@@ -1,7 +1,6 @@
 package calendar;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,7 +18,9 @@ public class Event {
 	}
 	
 	public int getDayOfTheWeek() {
-		return eventTime.getDay();
+		Calendar c = Calendar.getInstance();
+		c.setTime(eventTime);
+		return c.get(Calendar.DAY_OF_WEEK);
 	}
 
 	@Override
