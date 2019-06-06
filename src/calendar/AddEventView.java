@@ -137,27 +137,32 @@ class InputPanel extends JPanel{
 	
 	public int getYearInput() {
 		Scanner s = new Scanner(yearTf.getText());
+		s.close();
 		return s.nextInt();
 	}
 	
 	public int getMonthInput() {
 
 		Scanner s = new Scanner(monthTf.getText());
+		s.close();
 		return s.nextInt();
 	}
 	
 	public int getDayInput() {
 		Scanner s = new Scanner(dayTf.getText());
+		s.close();
 		return s.nextInt();
 	}
 	
 	public int getHourInput() {
 		Scanner s = new Scanner(hourTf.getText());
+		s.close();
 		return s.nextInt();
 	}
 	
 	public int getMinutesInput() {
 		Scanner s = new Scanner(minutesTf.getText());
+		s.close();
 		return s.nextInt();
 	}
 	
