@@ -19,6 +19,7 @@ public class CalendarView extends JFrame{
 	/**
 	 * 
 	 */
+	//xd
 	private static final long serialVersionUID = 1L;
 	public CalendarView() {
 		super("Calendar");
