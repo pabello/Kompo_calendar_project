@@ -9,8 +9,8 @@ public class Main {
     	
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                CalendarView a = new CalendarView();
-            	AddEventView e = new AddEventView();
+//                AddEventView a = new AddEventView();
+            	CalendarView TheCalendar = new CalendarView();
             }
     	
         });
