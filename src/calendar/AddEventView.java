@@ -1,8 +1,11 @@
 package calendar;
 
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class AddEventView extends JFrame{
@@ -23,11 +27,11 @@ public class AddEventView extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private ButtonPanel btnPanel;
 	private InputPanel inptPanel;
-	public static EventList events;
+	public  EventList events;
 	
-	public AddEventView() {
+	public AddEventView(EventList  events, Date date) {
 			super("Add Event");
-			events = new EventList();
+			this.events = events;
 	        System.out.println("Created GUI on EDT? "+
 	                SwingUtilities.isEventDispatchThread());
 
@@ -35,7 +39,7 @@ public class AddEventView extends JFrame{
 	        this.setSize(250,20);
 	        JPanel master = new JPanel();
 	        master.setLayout(new BoxLayout(master, BoxLayout.Y_AXIS));
-	        inptPanel = new InputPanel();
+	        inptPanel = new InputPanel(date);
 	        master.add(inptPanel);
 	        btnPanel = new ButtonPanel();
 	        master.add(btnPanel);
@@ -92,78 +96,74 @@ class InputPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField yearTf, monthTf, dayTf, hourTf, minutesTf;
+	private JTextField hourTf, minutesTf;
 	private JPanel yearPanel, monthPanel, dayPanel, hourPanel, minutesPanel;
+	Calendar c;
 	
-	public InputPanel() {
+	public InputPanel(Date date) {
 		super();
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setLayout(new GridLayout(1, 5, 5, 5));
+		this.c = Calendar.getInstance();
+		c.setTime(date);
 		
 		yearPanel = new JPanel();
+		//yearPanel.setAlignmentX(CENTER_ALIGNMENT);
 		yearPanel.setLayout(new BoxLayout(yearPanel, BoxLayout.Y_AXIS));
-		yearPanel.add(new JLabel("year:"));
-		yearTf = new JTextField("YYYY");
-		yearPanel.add(this.yearTf);
+		yearPanel.add(new JLabel("Year"));
+		yearPanel.add(new JLabel("" + c.get(Calendar.YEAR)));
 		this.add(this.yearPanel);
 		
 		monthPanel = new JPanel();
 		monthPanel.setLayout(new BoxLayout(monthPanel, BoxLayout.Y_AXIS));
-		monthPanel.add(new JLabel("month:"));
-		monthTf = new JTextField("MM");
-		monthPanel.add(this.monthTf);
+		monthPanel.add(new JLabel("Month"));
+		monthPanel.add(new JLabel("" + (c.get(Calendar.MONTH)+1), SwingConstants.RIGHT));
 		this.add(this.monthPanel);
 		
 		dayPanel = new JPanel();
 		dayPanel.setLayout(new BoxLayout(dayPanel, BoxLayout.Y_AXIS));
-		dayPanel.add(new JLabel("day:"));
-		dayTf = new JTextField("DD");
-		dayPanel.add(this.dayTf);
+		dayPanel.add(new JLabel("Day"));
+		dayPanel.add(new JLabel("" + c.get(Calendar.DAY_OF_MONTH)));
 		this.add(this.dayPanel);
 		
 		hourPanel = new JPanel();
 		hourPanel.setLayout(new BoxLayout(hourPanel, BoxLayout.Y_AXIS));
-		hourPanel.add(new JLabel("hour:"));
+		hourPanel.add(new JLabel("Hour"));
 		hourTf = new JTextField("HH");
 		hourPanel.add(this.hourTf);
 		this.add(this.hourPanel);
 		
 		minutesPanel = new JPanel();
 		minutesPanel.setLayout(new BoxLayout(minutesPanel, BoxLayout.Y_AXIS));
-		minutesPanel.add(new JLabel("minutes:"));
+		minutesPanel.add(new JLabel("Minutes"));
 		minutesTf = new JTextField("MM");
 		minutesPanel.add(this.minutesTf);
 		this.add(this.minutesPanel);
 	}
 	
 	public int getYearInput() {
-		Scanner s = new Scanner(yearTf.getText());
-		s.close();
-		return s.nextInt();
+		return this.c.get(Calendar.YEAR);
 	}
 	
 	public int getMonthInput() {
-
-		Scanner s = new Scanner(monthTf.getText());
-		s.close();
-		return s.nextInt();
+		return this.c.get(Calendar.MONTH);
 	}
 	
 	public int getDayInput() {
-		Scanner s = new Scanner(dayTf.getText());
-		s.close();
-		return s.nextInt();
+		return this.c.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	public int getHourInput() {
 		Scanner s = new Scanner(hourTf.getText());
+		int buff = s.nextInt();
 		s.close();
-		return s.nextInt();
+		return buff;
 	}
 	
 	public int getMinutesInput() {
 		Scanner s = new Scanner(minutesTf.getText());
+		int buff = s.nextInt();
 		s.close();
-		return s.nextInt();
+		return buff;
 	}
 	
 	
