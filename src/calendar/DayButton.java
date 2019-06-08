@@ -1,15 +1,21 @@
 package calendar;
 
+import java.util.Calendar;
 import java.util.Date;
 
-import javax.accessibility.Accessible;
-import javax.swing.AbstractButton;
+import javax.swing.JButton;
 
-public class DayButton extends AbstractButton implements Accessible{
-	Date date;
+public class DayButton extends JButton{
+	private static final long serialVersionUID = 1L;
 	
-	DayButton(Date date) {
+	Calendar date;
+
+	DayButton(Calendar date) {
 		super();
+		this.date = date;
+	}
+	DayButton(String desc, Calendar date) {
+		super(desc);
 		this.date = date;
 	}
 }

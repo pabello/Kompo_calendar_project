@@ -1,8 +1,11 @@
 package calendar;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.util.Calendar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,42 +22,74 @@ public class CalendarView extends JFrame{
 	JPanel labels;
 	JPanel header;
 	JPanel master;
+	int currentDayOfMonth;
+	int currentMonth;
 	/**
 	 * 
 	 */
 	//xd
 	private static final long serialVersionUID = 1L;
-	public CalendarView() {
+	public CalendarView(Calendar calendarInstance) {
 		super("Calendar");
-//		this.setLayout(new GridLayout(2,1,0,20));
+		this.setLayout(new GridLayout(2,1,0,20));
+
+//		calendarInstance.setFirstDayOfWeek(Calendar.MONDAY);
+		currentDayOfMonth = calendarInstance.get(Calendar.DAY_OF_MONTH);
+		currentMonth = calendarInstance.get(Calendar.MONTH);
 		
 		this.header = new JPanel();
 		JButton yearLeft = new JButton("<<");
 		JButton monthLeft = new JButton("<");
 		JLabel monthName = new JLabel("month");
-		JButton monthRigth = new JButton(">");
-		JButton yearRigth = new JButton(">>");
+		JButton monthRight = new JButton(">");
+		JButton yearRight = new JButton(">>");
 
-		yearLeft.setPreferredSize(new Dimension(20,20));
+		yearLeft.setPreferredSize(new Dimension(25,25));
+		yearLeft.setMargin(new Insets(0,0,0,0));
 		this.header.add(yearLeft);
-		monthLeft.setPreferredSize(new Dimension(20,20));
+		monthLeft.setPreferredSize(new Dimension(25,25));
+		monthLeft.setMargin(new Insets(0,0,0,0));
 		this.header.add(monthLeft);
 		this.header.add(monthName);
-		monthRigth.setPreferredSize(new Dimension(20,20));
-		this.header.add(monthRigth);
-		yearRigth.setPreferredSize(new Dimension(20,20));
-		this.header.add(yearRigth);
+		monthRight.setPreferredSize(new Dimension(25,25));
+		monthRight.setMargin(new Insets(0,0,0,0));
+		this.header.add(monthRight);
+		yearRight.setPreferredSize(new Dimension(25,25));
+		yearRight.setMargin(new Insets(0,0,0,0));
+		this.header.add(yearRight);
 		
 		
 		this.master = new JPanel();
 		this.master.setLayout(new GridLayout(6,7,1,1));
 		
-		for(int i=0; i<6; i++) { // 6 = number of rows
-			for(int j=1; j<8; j++) {
-				JButton button = new JButton(String.valueOf((7*i) + j));
-				button.setPreferredSize(new Dimension(60,60));
-				this.master.add(button);
+		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+		if(calendarInstance.get(Calendar.DAY_OF_MONTH) != 1)
+			calendarInstance.set(Calendar.DAY_OF_MONTH, 1);
+		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK)+"\r\n");
+		if(calendarInstance.get(Calendar.DAY_OF_WEEK) != 1)
+			calendarInstance.add(Calendar.DAY_OF_MONTH, -(Calendar.DAY_OF_WEEK-2));
+		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK));
+		
+		for(int i=0; i<42; i++) {
+			DayButton button = new DayButton(String.valueOf(calendarInstance.get(Calendar.DAY_OF_MONTH)), calendarInstance);
+			button.setPreferredSize(new Dimension(60,60));
+			if((calendarInstance.get(Calendar.DAY_OF_MONTH) == currentDayOfMonth) && 
+			   (calendarInstance.get(Calendar.MONTH) == currentMonth)) {
+				button.setBackground(new Color(250,250,250));
+				System.out.println("\r\n" + calendarInstance.get(Calendar.DAY_OF_MONTH)+" vs "+currentDayOfMonth);
+				System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK));
 			}
+			else {
+				if((calendarInstance.get(Calendar.DAY_OF_WEEK) == 1) ||
+				   (calendarInstance.get(Calendar.DAY_OF_WEEK) == 7))
+					button.setBackground(new Color(225,225,225));
+				else
+					button.setBackground(new Color(235,235,235));
+			}
+			this.master.add(button);
+			calendarInstance.add(Calendar.DAY_OF_MONTH, 1);
 		}
 
 //		this.master.setLayout(new GridBagLayout());
