@@ -6,11 +6,20 @@ import java.util.Date;
 
 public class Event {
 	String name;
+	String place;
 	Date creationTime;
 	Date eventTime;
-	
+
 	Event(String name, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
+		creationTime  = new Date();
+		Calendar c = Calendar.getInstance();
+		c.set(year, month-1, day, hour, minutes, 0);
+		eventTime = c.getTime();
+	}
+	Event(String name, String place, int year, int month, int day, int hour, int minutes) {
+		this.name = name;
+		this.place = place;
 		creationTime  = new Date();
 		Calendar c = Calendar.getInstance();
 		c.set(year, month-1, day, hour, minutes, 0);

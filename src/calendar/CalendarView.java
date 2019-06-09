@@ -6,7 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.Calendar;
+import java.util.Locale;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -36,6 +38,7 @@ public class CalendarView extends JFrame{
 //		calendarInstance.setFirstDayOfWeek(Calendar.MONDAY);
 		currentDayOfMonth = calendarInstance.get(Calendar.DAY_OF_MONTH);
 		currentMonth = calendarInstance.get(Calendar.MONTH);
+		System.out.println("month: " + currentMonth);
 		
 		this.header = new JPanel();
 		JButton yearLeft = new JButton("<<");
@@ -60,33 +63,60 @@ public class CalendarView extends JFrame{
 		
 		
 		this.master = new JPanel();
-		this.master.setLayout(new GridLayout(6,7,1,1));
+		this.master.setLayout(new GridLayout(7,7,1,1));
 		
-		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+//		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
 		if(calendarInstance.get(Calendar.DAY_OF_MONTH) != 1)
 			calendarInstance.set(Calendar.DAY_OF_MONTH, 1);
-		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
-		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK)+"\r\n");
+//		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+//		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK)+"\r\n");
 		if(calendarInstance.get(Calendar.DAY_OF_WEEK) != 1)
 			calendarInstance.add(Calendar.DAY_OF_MONTH, -(Calendar.DAY_OF_WEEK-2));
-		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
-		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK));
+//		System.out.println(calendarInstance.get(Calendar.DAY_OF_MONTH));
+//		System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK));
+		
+		for(int i=0; i<7; i++) {
+			JLabel dayLabel = new JLabel(calendarInstance.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US));
+			master.add(dayLabel);
+			calendarInstance.roll(Calendar.DAY_OF_WEEK, 1);
+		}
 		
 		for(int i=0; i<42; i++) {
 			DayButton button = new DayButton(String.valueOf(calendarInstance.get(Calendar.DAY_OF_MONTH)), calendarInstance);
-			button.setPreferredSize(new Dimension(60,60));
+			button.setPreferredSize(new Dimension(60,40));
 			if((calendarInstance.get(Calendar.DAY_OF_MONTH) == currentDayOfMonth) && 
 			   (calendarInstance.get(Calendar.MONTH) == currentMonth)) {
 				button.setBackground(new Color(250,250,250));
+				button.setBorder(BorderFactory.createLineBorder(new Color(255,165,0), 2));
+				button.addMouseListener(new java.awt.event.MouseAdapter() {
+					public void mouseEntered(java.awt.event.MouseEvent event) {
+						Color darker = new Color(255,192,76);
+						Color lighter = new Color(255,219,153);
+						button.setBorder(BorderFactory.createBevelBorder(1, lighter, darker, lighter, darker));
+					}
+					public void mouseExited(java.awt.event.MouseEvent event) {
+						button.setBorder(BorderFactory.createLineBorder(new Color(255, 160, 0), 2));
+					}
+				});
 				System.out.println("\r\n" + calendarInstance.get(Calendar.DAY_OF_MONTH)+" vs "+currentDayOfMonth);
 				System.out.println(calendarInstance.get(Calendar.DAY_OF_WEEK));
 			}
 			else {
 				if((calendarInstance.get(Calendar.DAY_OF_WEEK) == 1) ||
-				   (calendarInstance.get(Calendar.DAY_OF_WEEK) == 7))
+				   (calendarInstance.get(Calendar.DAY_OF_WEEK) == 7)) {
+					if(calendarInstance.get(Calendar.MONTH) != currentMonth) {
+						button.setBorder(BorderFactory.createLineBorder(new Color(200,200,200), 1));
+						button.setEnabled(false);
+					}
 					button.setBackground(new Color(225,225,225));
+				}
 				else
-					button.setBackground(new Color(235,235,235));
+					if(calendarInstance.get(Calendar.MONTH) != currentMonth) {
+						button.setBorder(BorderFactory.createLineBorder(new Color(210,210,210), 1));
+						button.setEnabled(false);	
+					}
+					else
+						button.setBackground(new Color(235,235,235));
 			}
 			this.master.add(button);
 			calendarInstance.add(Calendar.DAY_OF_MONTH, 1);
