@@ -12,8 +12,9 @@ public class Main {
     	
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                AddEventView a = new AddEventView(new EventList(), new Date());
-            	//CalendarView TheCalendar = new CalendarView();
+//            	DayView d = new DayView(new EventList(), new Date());
+//                AddEventView a = new AddEventView(new EventList(), new Date());
+            	CalendarView TheCalendar = new CalendarView(Calendar.getInstance()); Gladko jak po pupci niemowlaka ( ͡° ͜ʖ ͡°)
             }
     	
         });

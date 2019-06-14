@@ -3,7 +3,6 @@ package calendar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -23,25 +22,29 @@ public class CalendarView extends JFrame{
 	
 	EventList eventList = new EventList();
 
-	JPanel labels;
 	JPanel header;
 	JPanel master;
 	Calendar calendarInstance;
 	int currentDayOfMonth;
 	int currentMonth;
+	int currentYear;
 
 	public CalendarView(Calendar calendarInstance) {
 		super("Calendar");
 
 		this.calendarInstance = calendarInstance;
-		currentDayOfMonth = calendarInstance.get(Calendar.DAY_OF_MONTH);
-		currentMonth = calendarInstance.get(Calendar.MONTH);
 		
-		init();
+		init(null);
 	}
 	
 	private static final long serialVersionUID = 1L;
-	public void init() {
+	
+	public void init(Dimension dim) {
+		
+		currentDayOfMonth = calendarInstance.get(Calendar.DAY_OF_MONTH);
+		currentMonth = calendarInstance.get(Calendar.MONTH);
+		currentYear = calendarInstance.get(Calendar.YEAR);
+		
 		this.setLayout(new BorderLayout());
 		
 		Color dniPowszednie = new Color(225,225,225);
@@ -52,19 +55,40 @@ public class CalendarView extends JFrame{
 		yearLeft.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				calendarInstance.set(calendarInstance.get(Calendar.YEAR), currentMonth, currentDayOfMonth);
 				calendarInstance.add(Calendar.YEAR, -1);
-				System.out.println("wszlo");
-				CalendarView.this.doLayout();
 				update();
 			}
-			
 		});
 		JButton monthLeft = new JButton("<");
-		JLabel monthName = new JLabel("month");
+		monthLeft.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				calendarInstance.add(Calendar.MONTH, -1);
+				currentMonth = calendarInstance.get(Calendar.MONTH);
+				update();
+			}
+		});
+		JLabel monthName = new JLabel("" + 
+				calendarInstance.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US) + "  " +
+				calendarInstance.get(Calendar.YEAR));
+		monthName.setPreferredSize(new Dimension(115, 25));
+		monthName.setHorizontalAlignment(SwingConstants.CENTER);
 		JButton monthRight = new JButton(">");
+		monthRight.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				calendarInstance.add(Calendar.MONTH, +1);
+				update();
+			}
+		});
 		JButton yearRight = new JButton(">>");
+		yearRight.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				calendarInstance.add(Calendar.YEAR, +1);
+				update();
+			}
+		});
 
 		yearLeft.setPreferredSize(new Dimension(25,25));
 		yearLeft.setMargin(new Insets(0,0,0,0));
@@ -82,12 +106,14 @@ public class CalendarView extends JFrame{
 		
 		this.master = new JPanel();
 		this.master.setLayout(new GridLayout(7,7,1,1));
-		
+
 		if(calendarInstance.get(Calendar.DAY_OF_MONTH) != 1)
-			calendarInstance.set(Calendar.DAY_OF_MONTH, 1);
-		if(calendarInstance.get(Calendar.DAY_OF_WEEK) != 1)
-			calendarInstance.add(Calendar.DAY_OF_MONTH, -(Calendar.DAY_OF_WEEK-2));
+			calendarInstance.add(Calendar.DAY_OF_MONTH, 1-calendarInstance.get(Calendar.DAY_OF_MONTH));
+		if(calendarInstance.get(Calendar.DAY_OF_WEEK) == 2)
+			calendarInstance.add(Calendar.DAY_OF_MONTH, -7);
+			calendarInstance.add(Calendar.DAY_OF_MONTH, -((((calendarInstance.get(Calendar.DAY_OF_WEEK)-2)%7)+7)%7));
 		
+		calendarInstance.roll(Calendar.DAY_OF_WEEK, 2-calendarInstance.get(Calendar.DAY_OF_WEEK));
 		for(int i=0; i<7; i++) {
 			JLabel dayLabel = new JLabel(calendarInstance.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US), SwingConstants.CENTER);
 			master.add(dayLabel);
@@ -133,16 +159,24 @@ public class CalendarView extends JFrame{
 			this.master.add(button);
 			calendarInstance.add(Calendar.DAY_OF_MONTH, 1);
 		}
+		calendarInstance.add(Calendar.MONTH, currentMonth-calendarInstance.get(Calendar.MONTH));
+		calendarInstance.add(Calendar.DAY_OF_MONTH, currentDayOfMonth-calendarInstance.get(Calendar.DAY_OF_MONTH));
+		calendarInstance.add(Calendar.YEAR,  currentYear-calendarInstance.get(Calendar.YEAR));
 		
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(header, BorderLayout.NORTH);
 		this.add(master, BorderLayout.CENTER);
-        this.pack();
+        if(dim != null) 
+        	this.setPreferredSize(dim);
+        else
+        	this.pack();
         this.setVisible(true);
         
 	}
 	
 	public void update() {
-		
+		this.remove(header);
+		this.remove(master);
+		init(this.getSize());
 	}
 }
