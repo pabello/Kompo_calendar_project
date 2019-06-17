@@ -18,6 +18,14 @@ public class EventList {
 		events.add(arg);
 	}
 	
+	public Vector<Event> getAll(){
+		return events;
+	}
+	
+	public int getSize() {
+		return this.events.size();
+	}
+	
 	public String toString() {
 		String buff="";
 		for(Event e:this.events) {

@@ -1,10 +1,9 @@
 package calendar;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.SwingUtilities;
-import calendar.AddEventView;
+
 
 public class Main {
 	
@@ -12,9 +11,12 @@ public class Main {
     	
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-//            	DayView d = new DayView(new EventList(), new Date());
-//                AddEventView a = new AddEventView(new EventList(), new Date());
-            	CalendarView TheCalendar = new CalendarView(Calendar.getInstance()); Gladko jak po pupci niemowlaka ( ͡° ͜ʖ ͡°)
+            	EventList l = new EventList();
+            	l.add(new Event("a", "a", 2019, 6, 25, 4, 5));
+            	System.out.println(l.toString());
+            	DayView d = new DayView();
+                //AddEventView a = new AddEventView(new EventList(), new Date());
+            	//CalendarView TheCalendar = new CalendarView(Calendar.getInstance());
             }
     	
         });

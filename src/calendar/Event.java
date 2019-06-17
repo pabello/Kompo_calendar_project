@@ -34,7 +34,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [name=" + name + ", creationTime=" + creationTime.toString() + ", eventTime=" + eventTime.toString() + "]";
+		return "Event [name=" + name + ", eventTime=" + eventTime.toString() + "]";
 	};
 	
 	
