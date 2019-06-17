@@ -1,18 +1,18 @@
 package calendar;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Event {
 	String name;
 	String place;
-	Date creationTime;
 	Date eventTime;
 
 	Event(String name, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
-		creationTime  = new Date();
 		Calendar c = Calendar.getInstance();
 		c.set(year, month-1, day, hour, minutes, 0);
 		eventTime = c.getTime();
@@ -20,10 +20,20 @@ public class Event {
 	Event(String name, String place, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
 		this.place = place;
-		creationTime  = new Date();
 		Calendar c = Calendar.getInstance();
 		c.set(year, month-1, day, hour, minutes, 0);
 		eventTime = c.getTime();
+	}
+	
+	Event(String name, String place, Date date) {
+		this.name = name;
+		this.place = place;
+		this.eventTime = date;
+	}
+	
+	Event(String name, Date date) {
+		this.name = name;
+		this.eventTime = date;
 	}
 	
 	public int getDayOfTheWeek() {
@@ -34,13 +44,29 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [name=" + name + ", eventTime=" + eventTime.toString() + "]";
+		StringBuffer buff = new StringBuffer();
+		
+		buff.append("Event [name=" + name + ", place=");
+		if(!place.isEmpty()) 
+			buff.append(place);
+		else 
+			buff.append("Unknown");
+		buff.append(", " + formatDate() + "]");
+		
+		return buff.toString();
 	};
 	
-	
-	
-	
-	 
+	public String formatDate() {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return format.format(eventTime);
+	}
+
+//	DEPRECATED xD
+//	public String getHourAndMinutes(){
+//		Calendar c = Calendar.getInstance();
+//		c.setTime(eventTime);
+//		return c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE);
+//	}
 	
 }
 
