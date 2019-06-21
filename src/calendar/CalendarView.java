@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 public class CalendarView extends JFrame{
 	
-	EventList eventList = new EventList();
+	EventList eventList;
+	DayView dayView;
 
 	JPanel header;
 	JPanel master;
@@ -29,10 +30,11 @@ public class CalendarView extends JFrame{
 	int currentMonth;
 	int currentYear;
 
-	public CalendarView(Calendar calendarInstance) {
+	public CalendarView(Calendar calendarInstance, EventList eventList) {
 		super("Calendar");
 
 		this.calendarInstance = calendarInstance;
+		this.eventList = eventList;
 		
 		init(null);
 	}
@@ -122,22 +124,13 @@ public class CalendarView extends JFrame{
 		
 		for(int i=0; i<42; i++) {
 			DayButton button = new DayButton(String.valueOf(calendarInstance.get(Calendar.DAY_OF_MONTH)), calendarInstance.getTime());
-			button.addActionListener(new DayButtonActionListener());
+//			button.addActionListener(new DayButtonActionListener());
 			button.setPreferredSize(new Dimension(60,40));
 			if((calendarInstance.get(Calendar.DAY_OF_MONTH) == currentDayOfMonth) && 
 			   (calendarInstance.get(Calendar.MONTH) == currentMonth)) {
 				button.setBackground(new Color(250,250,250));
 				button.setBorder(BorderFactory.createLineBorder(new Color(255,165,0), 2));
-				button.addMouseListener(new java.awt.event.MouseAdapter() {
-					public void mouseEntered(java.awt.event.MouseEvent event) {
-						Color darker = new Color(255,192,76);
-						Color lighter = new Color(255,219,153);
-						button.setBorder(BorderFactory.createBevelBorder(1, lighter, darker, lighter, darker));
-					}
-					public void mouseExited(java.awt.event.MouseEvent event) {
-						button.setBorder(BorderFactory.createLineBorder(new Color(255, 160, 0), 2));
-					}
-				});
+				button.addMouseListener(new DayButtonMouseAdapter(true, this));
 			}
 			else {
 				if((calendarInstance.get(Calendar.DAY_OF_WEEK) == 1) ||
@@ -146,6 +139,8 @@ public class CalendarView extends JFrame{
 						button.setBorder(BorderFactory.createLineBorder(new Color(200,200,200), 1));
 						button.setEnabled(false);
 					}
+					else
+						button.addMouseListener(new DayButtonMouseAdapter(false, this));
 					button.setBackground(dniPowszednie);
 				}
 				else
@@ -153,8 +148,10 @@ public class CalendarView extends JFrame{
 						button.setBorder(BorderFactory.createLineBorder(new Color(210,210,210), 1));
 						button.setEnabled(false);	
 					}
-					else
+					else {
+						button.addMouseListener(new DayButtonMouseAdapter(false, this));
 						button.setBackground(weekend);
+					}
 			}
 			this.master.add(button);
 			calendarInstance.add(Calendar.DAY_OF_MONTH, 1);

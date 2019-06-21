@@ -10,17 +10,18 @@ public class Main {
 	static boolean gui = true;
 	
     public static void main(String[] args) {
-    	for(String arg : args)
-    		if(arg.equals("--nogui")) gui = false;
-    	if(gui) {
-    		SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                	EventList l = new EventList();
-                	CalendarView.
-                }
-            });	
-    	}
-    	else System.out.println("Invoke console ui");
+    	EventList eventList = new EventList();
+    	
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+//            	EventList l = new EventList();
+//            	l.add(new Event("a", "a", 2019, 6, 25, 4, 5));
+//            	System.out.println(l.toString());
+//            	DayView d = new DayView(l, new Date());
+//                AddEventView a = new AddEventView(new EventList(), new Date());
+            	CalendarView TheCalendar = new CalendarView(Calendar.getInstance(), eventList);
+            }
+        });
 //    	JDBC bazka = new JDBC("mordekaiser");
 //    	EventList lista = new EventList();
 //    	try {

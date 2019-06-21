@@ -8,6 +8,7 @@ public class DayButton extends JButton{
 	private static final long serialVersionUID = 1L;
 	
 	Date date;
+	DayView dayView;
 
 	DayButton(Date date) {
 		super();
