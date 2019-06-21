@@ -16,7 +16,7 @@ public class Main {
     		SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                 	EventList l = new EventList();
-                	DayView d = new DayView(l, new Date());
+                	CalendarView.
                 }
             });	
     	}
