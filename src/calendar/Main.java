@@ -8,20 +8,37 @@ import javax.swing.SwingUtilities;
 
 public class Main {
 	static boolean gui = true;
-	
     public static void main(String[] args) {
     	EventList eventList = new EventList();
+    	/*for(String arg : args)
+    		if(arg.equals("--nogui")) gui = false;
+    	if(gui) {
+    		SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                	CalendarView TheCalendar = new CalendarView(Calendar.getInstance(), eventList);
+                }
+            });
+    	}
+    	else System.out.println("Invoke console ui");*/
+    	eventList.add(new Event("aaaa", "", 1, 2, 3, 4, 5));
+    	eventList.add(new Event("aaaa", "", 1, 3, 3, 4, 5));
+    	eventList.add(new Event("aaaa", "", 1, 4, 3, 4, 5));
+    	System.out.println(eventList.toString());
+    	try {
+			XMLEventConverter.writeXML(eventList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-//            	EventList l = new EventList();
-//            	l.add(new Event("a", "a", 2019, 6, 25, 4, 5));
-//            	System.out.println(l.toString());
-//            	DayView d = new DayView(l, new Date());
-//                AddEventView a = new AddEventView(new EventList(), new Date());
-            	CalendarView TheCalendar = new CalendarView(Calendar.getInstance(), eventList);
-            }
-        });
+    	try {
+			eventList = (EventList) XMLEventConverter.readXML();
+			System.out.println(eventList.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 //    	JDBC bazka = new JDBC("mordekaiser");
 //    	EventList lista = new EventList();
 //    	try {

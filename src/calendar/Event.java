@@ -1,12 +1,20 @@
 package calendar;
 
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Event implements Comparable <Event>{
+public class Event implements Comparable <Event>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3337576213019253810L;
+	/**
+	 * 
+	 */
 	private String name;
 	private String place;
 	private Date eventTime;
@@ -23,13 +31,18 @@ public class Event implements Comparable <Event>{
 		return eventTime;
 	}
 
-	Event(String name, int year, int month, int day, int hour, int minutes) {
+	public Event() {
+		super();
+	}
+	public Event(String name, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
+		this.place = " ";
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
 	}
-	Event(String name, String place, int year, int month, int day, int hour, int minutes) {
+	
+	public Event(String name, String place, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
 		this.place = place;
 		Calendar c = Calendar.getInstance();
@@ -37,13 +50,13 @@ public class Event implements Comparable <Event>{
 		eventTime = c.getTime();
 	}
 	
-	Event(String name, String place, Date date) {
+	public Event(String name, String place, Date date) {
 		this.name = name;
 		this.place = place;
 		this.eventTime = date;
 	}
 	
-	Event(String name, Date date) {
+	public Event(String name, Date date) {
 		this.name = name;
 		this.eventTime = date;
 	}

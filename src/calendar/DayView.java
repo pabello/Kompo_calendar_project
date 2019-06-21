@@ -59,9 +59,19 @@ public class DayView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(Event event : DayView.this.v.events) {
-					if(!lm.contains(event))
-						lm.addElement(event);
+				a = new AddEventView(v, date);
+			}
+			
+		});
+		
+		remove = new JButton("Remove");
+		remove.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!DayView.this.l.isSelectionEmpty()) {
+					DayView.this.v.remove(DayView.this.l.getSelectedValue());
+					DayView.this.lm.removeElement(DayView.this.l.getSelectedValue());
 				}
 				a = new AddEventView(v, date);
 			}
@@ -80,13 +90,12 @@ public class DayView extends JFrame {
 	public boolean isEventToday(Event e) {
 		String today = sdf.format(this.date);
 		String eventDay = sdf.format(e.getEventTime());
-		System.out.println(today+":"+eventDay);
+		//System.out.println(today+":"+eventDay);
 		return today.equals(eventDay);
 	}
 	
 	public void updateList() {
 		for(Event event : DayView.this.v) {
-			System.out.println(/*(!lm.contains(event)) &&*/ this.isEventToday(event));
 			if((!lm.contains(event)) && this.isEventToday(event)) {
 				lm.addElement(event);
 			}
