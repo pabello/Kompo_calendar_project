@@ -107,11 +107,11 @@ public class JDBC {
 			writeStatement = conn.prepareStatement(insertString);
 			
 			for(Event event : eventList) {
-				System.out.println("eventName=" + event.name);
-				writeStatement.setString(1, event.name);
-				System.out.println("eventPlace=" + event.place);
-				writeStatement.setString(2, event.place);
-				writeStatement.setTimestamp(3, new Timestamp(event.eventTime.getTime()));
+				System.out.println("eventName=" + event.getName());
+				writeStatement.setString(1, event.getName());
+				System.out.println("eventPlace=" + event.getPlace());
+				writeStatement.setString(2, event.getPlace());
+				writeStatement.setTimestamp(3, new Timestamp(event.getEventTime().getTime()));
 				writeStatement.executeUpdate();
 				conn.commit();
 			}

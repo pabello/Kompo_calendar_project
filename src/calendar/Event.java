@@ -6,22 +6,34 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Event {
-	String name;
-	String place;
-	Date eventTime;
+public class Event implements Comparable <Event>{
+	private String name;
+	private String place;
+	private Date eventTime;
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public Date getEventTime() {
+		return eventTime;
+	}
 
 	Event(String name, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
 		Calendar c = Calendar.getInstance();
-		c.set(year, month-1, day, hour, minutes, 0);
+		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
 	}
 	Event(String name, String place, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
 		this.place = place;
 		Calendar c = Calendar.getInstance();
-		c.set(year, month-1, day, hour, minutes, 0);
+		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
 	}
 	
@@ -59,6 +71,12 @@ public class Event {
 	public String formatDate() {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return format.format(eventTime);
+
+	}
+
+	@Override
+	public int compareTo(Event arg0) {
+		return this.getEventTime().compareTo(arg0.getEventTime());
 	}
 
 //	DEPRECATED xD

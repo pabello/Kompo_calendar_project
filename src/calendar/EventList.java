@@ -1,6 +1,7 @@
 package calendar;
 
 
+import java.util.Collections;
 import java.util.Vector;
 
 public class EventList extends Vector<Event> {
@@ -24,5 +25,9 @@ public class EventList extends Vector<Event> {
 			buff+=e.toString()+"\n";
 		}
 		return buff;
+	}
+	
+	public void sort() {
+		Collections.sort(this);
 	}
 }
