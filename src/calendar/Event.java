@@ -8,6 +8,22 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Event implements Comparable <Event>, Serializable{
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public void setEventTime(Date eventTime) {
+		this.eventTime = eventTime;
+	}
+
 	/**
 	 * 
 	 */
