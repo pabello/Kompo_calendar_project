@@ -2,8 +2,6 @@ package calendar;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +22,7 @@ public class DayView extends JFrame {
 	private DefaultListModel<Event> lm;
 	private JButton add;
 	private EventList v;
+//	private AddEventView a;
 	private Date date;
 	private final static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	 
@@ -40,25 +38,22 @@ public class DayView extends JFrame {
 			public void mouseMoved(MouseEvent e) {
 				DayView.this.updateList();
 			}
-			
 			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseDragged(MouseEvent e) {}
 		});
 		lm = new DefaultListModel<Event>();
 		for(Event e : this.v) 
 			if(isEventToday(e))lm.addElement(e);
 		l = new JList<Event>(lm);
-		JScrollPane s = new JScrollPane(l, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane s = new JScrollPane(l, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		s.setPreferredSize(new Dimension(350, 150));
 		JPanel master = new JPanel();
 		add = new JButton("Add");
 		add.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new AddEventView(v, date);
+				/*a = */new AddEventView(v, date);
 			}
 			
 		});

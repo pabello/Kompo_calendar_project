@@ -3,17 +3,14 @@ package calendar;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 
 public class DayButtonMouseAdapter extends MouseAdapter{
 	boolean isThisDayToday;
-	CalendarView lord;
 	
-	public DayButtonMouseAdapter(boolean isThisDayToday, CalendarView lord) {
+	public DayButtonMouseAdapter(boolean isThisDayToday) {
 		this.isThisDayToday = isThisDayToday;
-		this.lord = lord;
 	}
 	
 	Color darker = new Color(255,192,76);
@@ -22,19 +19,19 @@ public class DayButtonMouseAdapter extends MouseAdapter{
 	public void mouseEntered(MouseEvent event) {
 		DayButton source = (DayButton) event.getComponent();
 		if(isThisDayToday) {
-			source.setBorder(BorderFactory.createBevelBorder(1, lighter, darker, lighter, darker));
+			source.setBorder(BorderFactory.createLineBorder(new Color(255, 160, 0), 2));
 		}
 	}
 	
 	public void mouseExited(MouseEvent event) {
 		DayButton source = (DayButton) event.getComponent();
 		if(isThisDayToday) {
-			source.setBorder(BorderFactory.createLineBorder(new Color(255, 160, 0), 2));
+			source.setBorder(BorderFactory.createBevelBorder(1, lighter, darker, lighter, darker));
 		}
 	}
 	
 	public void mouseClicked(MouseEvent event) {
 		DayButton source = (DayButton) event.getComponent();
-		lord.dayView = new DayView(lord.eventList, source.date);
+		CalendarView.dayView = new DayView(CalendarView.eventList, source.date);
 	}
 }
