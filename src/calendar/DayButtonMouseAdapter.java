@@ -32,6 +32,7 @@ public class DayButtonMouseAdapter extends MouseAdapter{
 	
 	public void mouseClicked(MouseEvent event) {
 		DayButton source = (DayButton) event.getComponent();
+		if(CalendarView.dayView != null) CalendarView.dayView.dispose();
 		CalendarView.dayView = new DayView(CalendarView.eventList, source.date);
 	}
 }

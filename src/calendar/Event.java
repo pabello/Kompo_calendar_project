@@ -97,12 +97,14 @@ public class Event implements Comparable <Event>, Serializable{
 	public String toString() {
 		StringBuffer buff = new StringBuffer();
 		
-		buff.append("Event [name=" + name + ", place=");
-		if(!place.isEmpty()) 
+		buff.append("[What]: " + name);
+		if(!place.isEmpty()) { 
+			buff.append("   [Where]: ");
 			buff.append(place);
+		}
 		else 
 			buff.append("Unknown");
-		buff.append(", " + formatDate() + "]");
+		buff.append("   [When]: " + formatDate());
 		
 		return buff.toString();
 	};

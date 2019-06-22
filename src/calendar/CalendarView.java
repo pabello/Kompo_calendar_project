@@ -127,7 +127,7 @@ public class CalendarView extends JFrame{
 		menuIconLabel.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				winnie = new OptionWindow();
+				winnie = new OptionWindow(CalendarView.this);
 			}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}

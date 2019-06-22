@@ -4,46 +4,47 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 public class OptionWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JPanel master;
 	JPanel management;
-	JPanel graphics;
 	JPanel csvHolder;
+	CalendarView calendarRef;
 	
-	public OptionWindow() {
+	public OptionWindow(CalendarView calendar) {
 		super("Options");
+		this.calendarRef = calendar;
+		init();
+	}
+		
+	private void init() {
 		this.setVisible(true);
 		
 		master = new JPanel();
 		management = new JPanel();
-		graphics = new JPanel();
 		csvHolder = new JPanel();
 		
 		master.setLayout(new BorderLayout());
 		management.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
-		graphics.setLayout(new BorderLayout());
 		
 		JCheckBox darkThemedBox = new JCheckBox("Dark themed mode", CalendarView.darkThemed);
+		darkThemedBox.setBackground(Color.LIGHT_GRAY);
+//		darkThemedBox.setForeground(new Color(255,237,15)); // z³owy kolor, ¿eby by³o widaæ, ¿e premium apka xd
 		darkThemedBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CalendarView.darkThemed = !CalendarView.darkThemed;
+				update();
 			}
 		});
 		darkThemedBox.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,6 +100,17 @@ public class OptionWindow extends JFrame {
 		csvExport.setToolTipText("Save events in standard .csv format.");
 		csvHolder.add(csvExport);
 		
+		if(CalendarView.darkThemed) {
+			management.setBackground(Color.DARK_GRAY);
+			csvHolder.setBackground(Color.DARK_GRAY);
+			
+			dbImport.setForeground(Color.WHITE);
+			dbExport.setForeground(Color.WHITE);
+			xmlImport.setForeground(Color.WHITE);
+			xmlExport.setForeground(Color.WHITE);
+			csvExport.setForeground(Color.WHITE);
+		}
+		
 		master.add(csvHolder, BorderLayout.NORTH);
 		master.add(management, BorderLayout.CENTER);
 		master.add(darkThemedBox, BorderLayout.SOUTH);
@@ -107,6 +119,13 @@ public class OptionWindow extends JFrame {
 		this.pack();
 	}
 	
-	
-
+	void update() {
+		calendarRef.update();
+		if(CalendarView.dayView != null) { 
+			CalendarView.dayView.colorUpdate();
+			if(CalendarView.dayView.a != null)
+				CalendarView.dayView.a.colorUpdate();
+		}
+		init();
+	}
 }
