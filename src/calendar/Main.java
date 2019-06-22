@@ -10,7 +10,7 @@ public class Main {
 	static boolean gui = true;
     public static void main(String[] args) {
     	EventList eventList = new EventList();
-    	/*for(String arg : args)
+    	for(String arg : args)
     		if(arg.equals("--nogui")) gui = false;
     	if(gui) {
     		SwingUtilities.invokeLater(new Runnable() {
@@ -19,25 +19,7 @@ public class Main {
                 }
             });
     	}
-    	else System.out.println("Invoke console ui");*/
-    	eventList.add(new Event("aaaa", "", 1, 2, 3, 4, 5));
-    	eventList.add(new Event("aaaa", "", 1, 3, 3, 4, 5));
-    	eventList.add(new Event("aaaa", "", 1, 4, 3, 4, 5));
-    	System.out.println(eventList.toString());
-    	try {
-			XMLEventConverter.writeXML(eventList);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	try {
-			eventList = (EventList) XMLEventConverter.readXML();
-			System.out.println(eventList.toString());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	else System.out.println("Invoke console ui");
 
 //    	JDBC bazka = new JDBC("mordekaiser");
 //    	EventList lista = new EventList();

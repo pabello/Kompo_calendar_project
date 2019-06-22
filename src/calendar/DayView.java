@@ -25,7 +25,6 @@ public class DayView extends JFrame {
 	private DefaultListModel<Event> lm;
 	private JButton add;
 	private EventList v;
-	private AddEventView a;
 	private Date date;
 	private final static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	 
@@ -59,7 +58,7 @@ public class DayView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				a = new AddEventView(v, date);
+				new AddEventView(v, date);
 			}
 			
 		});

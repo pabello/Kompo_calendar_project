@@ -3,53 +3,25 @@ package calendar;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Event implements Comparable <Event>, Serializable{
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setPlace(String place) {
-		this.place = place;
-	}
-
-	public void setEventTime(Date eventTime) {
-		this.eventTime = eventTime;
-	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3337576213019253810L;
-	/**
-	 * 
-	 */
 	private String name;
 	private String place;
 	private Date eventTime;
 
-	public String getName() {
-		return name;
-	}
-
-	public String getPlace() {
-		return place;
-	}
-
-	public Date getEventTime() {
-		return eventTime;
-	}
-
 	public Event() {
 		super();
 	}
+	
 	public Event(String name, int year, int month, int day, int hour, int minutes) {
 		this.name = name;
 		this.place = " ";
@@ -77,10 +49,48 @@ public class Event implements Comparable <Event>, Serializable{
 		this.eventTime = date;
 	}
 	
+	public Event(String name, String place, String date) {
+		this.name = name;
+		this.place = place;
+		try {
+			this.eventTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public int getDayOfTheWeek() {
 		Calendar c = Calendar.getInstance();
 		c.setTime(eventTime);
 		return c.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public Date getEventTime() {
+		return eventTime;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public void setEventTime(Date eventTime) {
+		this.eventTime = eventTime;
 	}
 
 	@Override

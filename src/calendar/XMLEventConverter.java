@@ -38,13 +38,7 @@ public class XMLEventConverter {
 		}
 	}
 
-	/**
-	 * Wczytuje i zwraca list� wszystkich wydarze� zapisanych w pliku export.xml
-	 * 
-	 * @return Lista wszystkich wydarze� zapisanych w pliku export.xml
-	 * @throws Exception
-	 */
-	@SuppressWarnings("unchecked")
+
 	public static List<Event> readXML() throws Exception {
 		Vector<Event> events = new Vector<Event>();
 		try {
