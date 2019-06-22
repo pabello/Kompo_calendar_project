@@ -1,7 +1,6 @@
 package calendar;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.SwingUtilities;
 
@@ -15,7 +14,7 @@ public class Main {
     	if(gui) {
     		SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                	CalendarView TheCalendar = new CalendarView(Calendar.getInstance(), eventList);
+                	new CalendarView(Calendar.getInstance(), eventList);
                 }
             });
     	}

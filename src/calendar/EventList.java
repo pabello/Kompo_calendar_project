@@ -2,6 +2,7 @@ package calendar;
 
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Vector;
 
 public class EventList extends Vector<Event> {
@@ -29,5 +30,24 @@ public class EventList extends Vector<Event> {
 	
 	public void sort() {
 		Collections.sort(this);
+	}
+	
+	public EventList searchEvent(String patern) {
+		EventList buff = new EventList();
+		for(Event event : this) {
+			if(event.toString().contains(patern)) {
+				buff.add(event);
+			}
+		}
+		return buff;
+		
+	}
+	
+	public void removeEventsBeforeDate(Date date) {
+		for(Event event:this) {
+			if(date.after(event.getEventTime())) {
+				this.remove(event);
+			}
+		}
 	}
 }
