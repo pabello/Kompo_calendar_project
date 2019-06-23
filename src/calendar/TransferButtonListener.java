@@ -28,9 +28,9 @@ public class TransferButtonListener implements MouseListener {
 		} else if(buttonNumber == 1) {
 			try {
 				CSVEventConverter.CSVwrite(CalendarView.eventList);
-				CalendarView.transferPopup = new TransferEffect("XML transfer success");
-			} catch(Exception ex){
-				CalendarView.transferPopup = new TransferEffect("XML transfer error");
+				CalendarView.transferPopup = new TransferEffect("CSV transfer success");
+			} catch(Exception ex) {
+				CalendarView.transferPopup = new TransferEffect("CSV transfer error");
 			}
 		} else if(buttonNumber == 2) {
 			try {
