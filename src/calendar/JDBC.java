@@ -15,9 +15,9 @@ public class JDBC {
 	String readString;
 	String writeString;
 	
-	JDBC(String username) {
+	JDBC() {
 		connectionParameters = ("jdbc:mysql://127.0.0.1/calendar_events?user=luser&password=Hexagonal_User1&serverTimezone=Etc/GMT-1");
-		this.username = username;
+		this.username = Main.getUsername();
 	}
 	
 	EventList read() throws SQLException, Exception {
@@ -96,7 +96,7 @@ public class JDBC {
 		}
 	}
 	
-	void insert(EventList eventList) throws SQLException {
+	void insert() throws SQLException {
 		String insertString = "INSERT INTO " +username+ " (`event_name`, `event_place`, `event_time`)"
 				+ " VALUES (?, ?, ?)";
 		
@@ -106,7 +106,7 @@ public class JDBC {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			writeStatement = conn.prepareStatement(insertString);
 			
-			for(Event event : eventList) {
+			for(Event event : CalendarView.eventList) {
 				System.out.println("eventName=" + event.getName());
 				writeStatement.setString(1, event.getName());
 				System.out.println("eventPlace=" + event.getPlace());

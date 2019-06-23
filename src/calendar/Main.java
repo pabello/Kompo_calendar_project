@@ -6,7 +6,10 @@ import javax.swing.SwingUtilities;
 
 
 public class Main {
+
+	private static String username = "mordekaiser";
 	static boolean gui = true;
+	
     public static void main(String[] args) {
     	EventList eventList = new EventList();
     	for(String arg : args)
@@ -18,33 +21,15 @@ public class Main {
                 }
             });
     	}
-    	else new CUI(eventList);
-//    	JDBC bazka = new JDBC("mordekaiser");
-//    	EventList lista = new EventList();
-//    	try {
-//    		lista = bazka.read();
-//    		System.out.println(lista.toString());
-//    	} catch (Exception e) {
-//    		System.out.println("No c�, jednak si� nie uda�o xd");
-//    	}
-//    	lista.add(new Event("Bede siedzial po nocach i pisal jakies gunwa", "W domu przed kompem", 2019, 6, 16, 23, 39));
-//    	
-//    	try {
-////    		bazka.create();
-//    		bazka.insert(lista);
-//    	} catch (Exception e) {
-//    		System.out.println("No co� se posz�o nie tak xd");
-//    	}
-//    	
-//    	try {
-//    		lista = bazka.read();
-//    		System.out.println(lista.toString());
-//    	} catch (Exception e) {
-//    		System.out.println("No c�, jednak si� nie uda�o xd");
-//    	}
-    	
+    	else new CUI(eventList);	
+    }
+
+    public static String getUsername() {
+    	return username;
     }
     
-  
+    public static void setUsername(String in) {
+    	username = in;
+    }  
 }
 

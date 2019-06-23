@@ -33,6 +33,8 @@ public class CalendarView extends JFrame{
 	static EventList eventList;
 	static DayView dayView;
 	static OptionWindow winnie;
+	static AboutWindow about;
+	static TransferEffect transferPopup;
 	static boolean darkThemed = true;
 
 	JPanel spaceHolder;
@@ -145,7 +147,9 @@ public class CalendarView extends JFrame{
 		infoIconLabel.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if(about != null)
+					about.dispose();
+				about = new AboutWindow();
 			}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}

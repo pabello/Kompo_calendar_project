@@ -43,15 +43,7 @@ public class DayView extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.v = v;
 		this.date = date;
-//		this.addMouseMotionListener(new MouseMotionListener() {
-//			
-//			@Override
-//			public void mouseMoved(MouseEvent e) {
-//				DayView.this.updateList();
-//			}
-//			@Override
-//			public void mouseDragged(MouseEvent e) {}
-//		});
+		
 		lm = new DefaultListModel<Event>();
 		for(Event e : this.v) 
 			if(isEventToday(e)) lm.addElement(e);

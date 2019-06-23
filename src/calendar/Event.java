@@ -119,14 +119,4 @@ public class Event implements Comparable <Event>, Serializable{
 	public int compareTo(Event arg0) {
 		return this.getEventTime().compareTo(arg0.getEventTime());
 	}
-
-//	DEPRECATED xD
-//	public String getHourAndMinutes(){
-//		Calendar c = Calendar.getInstance();
-//		c.setTime(eventTime);
-//		return c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE);
-//	}
-	
 }
-
-//		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss	EEE dd.MM.yyyy"); //hour:minute:sec	Tue 02.01.1978

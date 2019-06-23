@@ -18,22 +18,38 @@ public class XMLEventConverter {
 	 * @throws Exception
 	 */
 	public static void writeXML(Vector<Event> events) throws Exception {
-		FileOutputStream fos = new FileOutputStream("export.xml");
-		XMLEncoder fileEncoder = new XMLEncoder(fos);
-		fileEncoder.writeObject(events);
-		fileEncoder.flush();
-		fileEncoder.close();
-		fos.close();
+		try {
+			FileOutputStream fos = new FileOutputStream("export.xml");
+			XMLEncoder fileEncoder = new XMLEncoder(fos);
+			fileEncoder.writeObject(events);
+			fileEncoder.flush();
+			fileEncoder.close();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			throw new Exception("Could not save to export.xml\n Desc.: " + e.getMessage());
+		} catch (IOException e) {
+			throw new Exception("Could not save to export.xml\n Desc.: " + e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Could not save to export.xml\n Desc.: " + e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Vector<Event> readXML() throws Exception {
 		Vector<Event> events = new Vector<Event>();
-		FileInputStream fis = new FileInputStream("export.xml");
-		XMLDecoder fileDecoder = new XMLDecoder(fis);
-		events = (Vector<Event>) fileDecoder.readObject();
-		fileDecoder.close();
-		fis.close();
+		try {
+			FileInputStream fis = new FileInputStream("export.xml");
+			XMLDecoder fileDecoder = new XMLDecoder(fis);
+			events = (Vector<Event>) fileDecoder.readObject();
+			fileDecoder.close();
+			fis.close();
+		} catch (FileNotFoundException e) {
+			throw new Exception("Could not read from export.xml\n Desc.: " + e.getMessage());
+		} catch (IOException e) {
+			throw new Exception("Could not read from export.xml\n Desc.: " + e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Could not read from export.xml\n Desc.: " + e.getMessage());
+		}
 		return events;
 	}
 }

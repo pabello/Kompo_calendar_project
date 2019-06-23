@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CSVEventConverter {
-	public static void CSVwrite(EventList eventList) {
+	public static void CSVwrite(EventList eventList) throws Exception{
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("export.csv")));
 			for(Event event : eventList) {
@@ -29,12 +29,14 @@ public class CSVEventConverter {
 			bw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			throw new Exception();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new Exception();
 		}
 	}
 	
-	public static EventList CSVRead() {
+	public static EventList CSVRead() throws Exception {
 		EventList buff = new EventList();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("export.csv"));
@@ -46,8 +48,10 @@ public class CSVEventConverter {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			throw new Exception();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new Exception();
 		}
 		return buff;
 	}
