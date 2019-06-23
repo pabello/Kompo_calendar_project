@@ -49,16 +49,16 @@ public class OptionWindow extends JFrame {
 		});
 		darkThemedBox.setHorizontalAlignment(SwingConstants.CENTER);
 
-		ImageIcon dbImportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/dbimport32.png");
+		ImageIcon dbImportIcon = new ImageIcon("images\\dbimport32.png");
 		JLabel dbImport = new JLabel("Import", dbImportIcon, SwingConstants.CENTER);
 		dbImport.setToolTipText("Import events from database");
-		ImageIcon dbExportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/dbexport32.png");
+		ImageIcon dbExportIcon = new ImageIcon("images\\dbexport32.png");
 		JLabel dbExport = new JLabel("Export", dbExportIcon, SwingConstants.CENTER);
 		dbExport.setToolTipText("Export events to database");
-		ImageIcon xmlImportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/xmlimport32.png");
+		ImageIcon xmlImportIcon = new ImageIcon("images\\xmlimport32.png");
 		JLabel xmlImport = new JLabel("Import", xmlImportIcon, SwingConstants.CENTER);
 		xmlImport.setToolTipText("Import events from XML sheet");
-		ImageIcon xmlExportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/xmlexport32.png");
+		ImageIcon xmlExportIcon = new ImageIcon("images\\xmlexport32.png");
 		JLabel xmlExport = new JLabel("Export", xmlExportIcon, SwingConstants.CENTER);
 		xmlExport.setToolTipText("Export events to XML sheet");
 		management.add(xmlExport);
@@ -93,7 +93,7 @@ public class OptionWindow extends JFrame {
 //		JPanel elko = new JPanel();
 //		elko.setLayout(new BorderLayout());
 //		elko.add(management, BorderLayout.CENTER);
-		ImageIcon csvExportIcon = new ImageIcon("C:\\Users\\user\\Desktop\\Kompo\\trunk\\Projekt\\Kompo_calendar_project\\images\\csvexport32.png");
+		ImageIcon csvExportIcon = new ImageIcon("images\\csvexport32.png");
 		JLabel csvExport = new JLabel("Save as .csv", csvExportIcon, SwingConstants.CENTER);
 		csvExport.setHorizontalTextPosition(JLabel.CENTER);
 		csvExport.setVerticalTextPosition(JLabel.BOTTOM);

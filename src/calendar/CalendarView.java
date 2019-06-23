@@ -115,9 +115,9 @@ public class CalendarView extends JFrame{
 
 		JPanel menuIconPanel = new JPanel();
 		JPanel infoIconPanel = new JPanel();
-		ImageIcon menuIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/gear-icon48.png");
-		ImageIcon infoIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/about24.png");
-		ImageIcon searchIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/mglass24.png");
+		ImageIcon menuIcon = new ImageIcon("images\\gear-icon48.png");
+		ImageIcon infoIcon = new ImageIcon("images\\about24.png");
+		ImageIcon searchIcon = new ImageIcon("images\\mglass24.png");
 		JLabel menuIconLabel = new JLabel(menuIcon);
 		JLabel infoIconLabel = new JLabel(infoIcon);
 		JLabel searchIconLabel = new JLabel(searchIcon);
