@@ -1,6 +1,7 @@
 package calendar;
 
-
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 public class AddEventView extends JFrame{
 
@@ -142,14 +142,22 @@ class InputPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField hourTf, minutesTf, nameTf, placeTf;
-	private JPanel yearPanel, monthPanel, dayPanel, hourPanel, minutesPanel, namePanel, placePanel;
+	private JPanel yearPanel, monthPanel, dayPanel, hourPanel, minutesPanel, namePanel, placePanel, alarmMinutesPanel, alarmHourPanel;
 	private JLabel yearLabel, monthLabel, dayLabel, hourLabel, minutesLabel, nameLabel, placeLabel, yearLabel2, monthLabel2, dayLabel2;
 	Calendar c;
+	private JLabel alarmHourLabel;
+	private JTextField alarmHourTf;
+	private JLabel alarmMinutesLabel;
+	private JTextField alarmMinutesTf;
+	private JPanel event;
+	private JPanel alarm;
 	
 	public InputPanel(Date date) {
 		super();
-		this.setLayout(new GridLayout(1, 5, 5, 5));
+		this.setLayout(new BorderLayout());
 		this.c = Calendar.getInstance();
+		event = new JPanel(new GridLayout(1,5,5,0));
+		alarm =  new JPanel(new GridLayout(1, 2, 5, 0));
 		c.setTime(date);
 		
 		namePanel = new JPanel();
@@ -160,7 +168,7 @@ class InputPanel extends JPanel{
 		nameTf = new JTextField();
 		nameTf.setToolTipText("Insert event description here.");
 		namePanel.add(nameTf);
-		this.add(namePanel);
+		event.add(namePanel);
 		
 		placePanel = new JPanel();
 		placePanel.setLayout(new BoxLayout(placePanel, BoxLayout.Y_AXIS));
@@ -170,7 +178,7 @@ class InputPanel extends JPanel{
 		placeTf = new JTextField(); 
 		placeTf.setToolTipText("You can specify a place the event is going to happen.");
 		placePanel.add(placeTf);
-		this.add(placePanel);
+		event.add(placePanel);
 		
 		yearPanel = new JPanel();
 		//yearPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -179,7 +187,7 @@ class InputPanel extends JPanel{
 		yearPanel.add(yearLabel);
 		yearLabel2 = new JLabel("" + c.get(Calendar.YEAR));
 		yearPanel.add(yearLabel2);
-		this.add(this.yearPanel);
+		event.add(this.yearPanel);
 		
 		monthPanel = new JPanel();
 		monthPanel.setLayout(new BoxLayout(monthPanel, BoxLayout.Y_AXIS));
@@ -187,7 +195,7 @@ class InputPanel extends JPanel{
 		monthPanel.add(monthLabel);
 		monthLabel2 = new JLabel("" + (c.get(Calendar.MONTH)+1), SwingConstants.RIGHT);
 		monthPanel.add(monthLabel2);
-		this.add(this.monthPanel);
+		event.add(this.monthPanel);
 		
 		dayPanel = new JPanel();
 		dayPanel.setLayout(new BoxLayout(dayPanel, BoxLayout.Y_AXIS));
@@ -195,7 +203,7 @@ class InputPanel extends JPanel{
 		dayPanel.add(dayLabel);
 		dayLabel2 = new JLabel("" + c.get(Calendar.DAY_OF_MONTH));
 		dayPanel.add(dayLabel2);
-		this.add(this.dayPanel);
+		event.add(this.dayPanel);
 		
 		hourPanel = new JPanel();
 		hourPanel.setLayout(new BoxLayout(hourPanel, BoxLayout.Y_AXIS));
@@ -205,7 +213,7 @@ class InputPanel extends JPanel{
 		hourTf = new JTextField("");
 		hourTf.setToolTipText("Hour format is HH");
 		hourPanel.add(this.hourTf);
-		this.add(this.hourPanel);
+		event.add(this.hourPanel);
 		
 		minutesPanel = new JPanel();
 		minutesPanel.setLayout(new BoxLayout(minutesPanel, BoxLayout.Y_AXIS));
@@ -215,7 +223,30 @@ class InputPanel extends JPanel{
 		minutesTf = new JTextField("00");
 		minutesTf.setToolTipText("Minutes format is MM");
 		minutesPanel.add(this.minutesTf);
-		this.add(this.minutesPanel);
+		event.add(this.minutesPanel);
+		
+		alarmHourPanel = new JPanel();
+		alarmHourPanel.setLayout(new BoxLayout(alarmHourPanel, BoxLayout.Y_AXIS));
+		alarmHourPanel.setToolTipText("Minutes format is MM");
+		alarmHourLabel = new JLabel("Alarm hour");
+		alarmHourPanel.add(alarmHourLabel);
+		alarmHourTf = new JTextField("00");
+		alarmHourTf.setToolTipText("Alarm hour format is HH");
+		alarmHourPanel.add(this.alarmHourTf);
+		alarm.add(this.alarmHourPanel);
+		
+		alarmMinutesPanel = new JPanel();
+		alarmMinutesPanel.setLayout(new BoxLayout(alarmMinutesPanel, BoxLayout.Y_AXIS));
+		alarmMinutesPanel.setToolTipText("Minutes format is MM");
+		alarmMinutesLabel = new JLabel("Alarm minutes");
+		alarmMinutesPanel.add(alarmMinutesLabel);
+		alarmMinutesTf = new JTextField("00");
+		alarmMinutesTf.setToolTipText("Alarm hour format is HH");
+		alarmMinutesPanel.add(this.alarmMinutesTf);
+		alarm.add(this.alarmMinutesPanel);
+		
+		this.add(event, BorderLayout.NORTH);
+		this.add(alarm);
 	}
 	
 	public int getYearInput() {
@@ -265,6 +296,12 @@ class InputPanel extends JPanel{
 			placeTf.setBackground(color);
 			hourTf.setBackground(color);
 			minutesTf.setBackground(color);
+			alarm.setBackground(Color.DARK_GRAY);
+			event.setBackground(Color.DARK_GRAY);
+			alarmMinutesPanel.setBackground(Color.DARK_GRAY);
+			alarmHourPanel.setBackground(Color.DARK_GRAY);
+			alarmHourTf.setBackground(Color.DARK_GRAY);
+			alarmMinutesTf.setBackground(Color.DARK_GRAY);
 			
 			nameTf.setForeground(Color.WHITE);
 			placeTf.setForeground(Color.WHITE);
@@ -280,6 +317,10 @@ class InputPanel extends JPanel{
 			dayLabel2.setForeground(Color.WHITE);
 			hourLabel.setForeground(Color.WHITE);
 			minutesLabel.setForeground(Color.WHITE);
+			alarmHourLabel.setForeground(Color.WHITE);
+			alarmMinutesLabel.setForeground(Color.WHITE);
+			alarmHourTf.setForeground(Color.WHITE);
+			alarmMinutesTf.setForeground(Color.WHITE);
 		} else {
 			Color color = new Color(238,238,238);
 			this.setBackground(color);
@@ -294,6 +335,8 @@ class InputPanel extends JPanel{
 			placeTf.setBackground(Color.WHITE);
 			hourTf.setBackground(Color.WHITE);
 			minutesTf.setBackground(Color.WHITE);
+			alarm.setBackground(Color.WHITE);
+			event.setBackground(Color.WHITE);
 			
 			nameTf.setForeground(Color.BLACK);
 			placeTf.setForeground(Color.BLACK);
@@ -309,6 +352,9 @@ class InputPanel extends JPanel{
 			dayLabel2.setForeground(Color.BLACK);
 			hourLabel.setForeground(Color.BLACK);
 			minutesLabel.setForeground(Color.BLACK);
+			alarmHourLabel.setForeground(Color.black);
+			alarmMinutesLabel.setForeground(Color.BLACK);
+			
 		}
 	}
 }

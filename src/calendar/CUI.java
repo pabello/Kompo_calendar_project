@@ -99,16 +99,14 @@ public class CUI {
 
 	private Event addEvent() {
 		System.out.println("Write name:");
-		
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.next();
-		//scanner.close();
 		
 		System.out.println("Write place:");
 		scanner = new Scanner(System.in);
 		String place = scanner.next();
 
-		
 		System.out.println("Write year:");
 		scanner = new Scanner(System.in);
 		int year = scanner.nextInt();
@@ -116,8 +114,7 @@ public class CUI {
 		System.out.println("Write month:");
 		scanner = new Scanner(System.in);
 		int month = scanner.nextInt();
-
-		
+	
 		System.out.println("Write day:");
 		scanner = new Scanner(System.in);
 		int day = scanner.nextInt();
