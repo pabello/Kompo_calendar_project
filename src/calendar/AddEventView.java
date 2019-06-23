@@ -41,15 +41,15 @@ public class AddEventView extends JFrame{
 			super("Add Event");
 			this.events = events;
 	        master = new JPanel();
-	        master.setLayout(new GridLayout(3, 1, 0, 5));
+	        master.setLayout(new BorderLayout());
 	        msgPanel = new JPanel();
 	        msgLabel = new JLabel(" ");
 	        msgPanel.add(msgLabel);
-	        master.add(msgPanel);
+	        master.add(msgPanel, BorderLayout.NORTH);
 	        inptPanel = new InputPanel(date);
-	        master.add(inptPanel);
+	        master.add(inptPanel, BorderLayout.CENTER);
 	        btnPanel = new ButtonPanel();
-	        master.add(btnPanel);
+	        master.add(btnPanel, BorderLayout.SOUTH);
 	        btnPanel.getAddBtn().addActionListener(new ActionListener() {
 
 				@Override
