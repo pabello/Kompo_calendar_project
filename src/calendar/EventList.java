@@ -22,8 +22,10 @@ public class EventList extends Vector<Event> {
 	
 	public String toString() {
 		String buff="";
+		int i = 0;
 		for(Event e : this) {
-			buff+=e.toString()+"\n";
+			i++;
+			buff+=i+". "+e.toString()+"\n";
 		}
 		return buff;
 	}

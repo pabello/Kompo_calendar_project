@@ -18,8 +18,7 @@ public class Main {
                 }
             });
     	}
-    	else System.out.println("Invoke console ui");
-
+    	else new CUI(eventList);
 //    	JDBC bazka = new JDBC("mordekaiser");
 //    	EventList lista = new EventList();
 //    	try {
