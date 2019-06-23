@@ -8,7 +8,11 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * Klasa tworzÄ…ca okienko "O Programie"
+ *
+ */
 public class AboutWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
@@ -17,16 +21,19 @@ public class AboutWindow extends JFrame {
 	JLabel description;
 	JLabel copyright;
 	
+	/**
+	 *  Kontruktor tworzÄ…cy okno
+	 */
 	public AboutWindow() {
 		super("About");
 		
 		master = new JPanel();
-		authors = new JLabel("<html><b>Authors of this calendar are</b><br>   Andrzej ¯abski<br>   Pawe³ Wac³awiak</html>");
+		authors = new JLabel("<html><b>Authors of this calendar are</b><br>   Andrzej ï¿½abski<br>   Paweï¿½ Wacï¿½awiak</html>");
 		description = new JLabel("<html>The application is still in its Beta version and it's licenced as Freeware, although we are considering changing it to Beerware after final release.</html>");
 		Font font = description.getFont();
 		authors.setFont(font.deriveFont(Font.PLAIN));
 		description.setFont(font.deriveFont(Font.PLAIN));
-		copyright = new JLabel("<html>Copyright © 2019 by ¯abcia Ltd. All rights reserved.</html>");
+		copyright = new JLabel("<html>Copyright ï¿½ 2019 by ï¿½abcia Ltd. All rights reserved.</html>");
 		
 		master.setLayout(new BorderLayout());
 		master.add(authors, BorderLayout.NORTH);
@@ -42,6 +49,9 @@ public class AboutWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Metoda zmieniajÄ…ca kolorystykÄ™ okna w zaleÅ¼noÅ›ci od ustawieÅ„	
+	 */
 	public void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			master.setBackground(Color.DARK_GRAY);

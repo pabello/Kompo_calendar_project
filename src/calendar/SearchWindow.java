@@ -12,14 +12,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+/**
+ * Okno wyszukiwania wydarzeń.
+ *
+ */
 public class SearchWindow extends JFrame{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
 	private EventList eventList;
+	
+	/**
+	 * Konstrutor okna wyszukiwania wydarzeń.
+	 * @param eventList lista, w której bedziemy szukać.
+	 */
 	public SearchWindow(EventList eventList){
 		super("Search");
 		this.eventList = eventList;

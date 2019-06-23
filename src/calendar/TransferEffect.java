@@ -1,7 +1,6 @@
 package calendar;
 
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,6 +12,10 @@ public class TransferEffect extends JFrame {
 	JPanel master;
 	JLabel message;
 
+	/**
+	 * Klasa wyswielająca czy udałos ie zapisać, odczytać z pliku.
+	 * @param action efekt zapisu/odczytu.
+	 */
 	public TransferEffect(String action) {
 		super(action);
 		master = new JPanel();
@@ -30,6 +33,9 @@ public class TransferEffect extends JFrame {
 		colorUpdate();
 	}
 	
+	/**
+	 * Metoda ustawiająca kolorystykę zgodnie z ustawieniami.
+	 */
 	private void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			master.setBackground(Color.DARK_GRAY);

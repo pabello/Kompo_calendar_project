@@ -27,7 +27,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
+/**
+ * 
+ * Klasa głownego okna programu mającego wyglądać jak klendarz ścienny
+ *
+ */
 public class CalendarView extends JFrame{
 	
 	static EventList eventList;
@@ -49,6 +53,11 @@ public class CalendarView extends JFrame{
 	final Date realCurrentDate;
 	SimpleDateFormat todayFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.US);	
 
+	/**
+	 * Konstrutor
+	 * @param calendarInstance instacja Klendarza
+	 * @param eventList Lista wydarzeń
+	 */
 	public CalendarView(Calendar calendarInstance, EventList eventList) {
 		super("Calendar");
 
@@ -61,6 +70,10 @@ public class CalendarView extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Metoda rysująca okno i wszystkie jego komponenty
+	 * @param dim wymiary okna
+	 */
 	public void init(Dimension dim) {
 		
 		currentDayOfMonth = calendarInstance.get(Calendar.DAY_OF_MONTH);
@@ -345,6 +358,9 @@ public class CalendarView extends JFrame{
         
 	}
 	
+	/**
+	 * Metoda uaktualniająca komponenty przy zmianie miesiąca lub roku
+	 */
 	public void update() {
 		this.remove(backToPresent);
 		this.remove(header);

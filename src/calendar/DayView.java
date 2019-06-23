@@ -16,6 +16,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+/**
+ * Klasa wyświetlająca listę wydarzeń w dniu
+ *
+ */
+
 public class DayView extends JFrame {
 	
 	private static final long serialVersionUID = -6399041735933009077L;
@@ -28,7 +33,11 @@ public class DayView extends JFrame {
 	private Date date;
 	private final static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 	 
-
+	/**
+	 * Konstrutor tworzący okno z listą
+	 * @param v lista wszystkich wydarzeń
+	 * @param date data
+	 */
 	public DayView(EventList v, Date date) {
 		super(sdf.format(date));
 		
@@ -82,12 +91,21 @@ public class DayView extends JFrame {
 		colorUpdate();
 	}
 	
+	/**
+	 * Metoda sprawdzająca czy wydarzenie jest w dniu zadanym przez datę
+	 * @param e wydarzenie do sprawdzenia
+	 * @return true jezeli wydarzenie jest w dniu zadanym przez date
+	 * 		   false jezeli wydarzenie nie jest w tym dniu
+	 */
 	public boolean isEventToday(Event e) {
 		String today = sdf.format(this.date);
 		String eventDay = sdf.format(e.getEventTime());
 		return today.equals(eventDay);
 	}
 	
+	/**
+	 * Metoda uaktualniająca listę wyswietlaną w oknie
+	 */
 	public void updateList() {
 		for(Event event : DayView.this.v) {
 			if((!lm.contains(event)) && this.isEventToday(event)) {
@@ -96,6 +114,9 @@ public class DayView extends JFrame {
 		}
 	}
 	
+	/**
+	 * Metoda ustawiająca kolory zgodnie z ustawieniami 
+	 */
 	public void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			master.setBackground(Color.DARK_GRAY);

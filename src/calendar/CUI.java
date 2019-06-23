@@ -2,24 +2,39 @@ package calendar;
 
 import java.util.Scanner;
 
+/**
+ * Klasa konsolowego intefejsu użytkownika.
+ *
+ */
 public class CUI {
 	private EventList eventList;
+	
+	/**
+	 * Konstruktor interfajsu.
+	 * @param eventList lista eventow
+	 */
 	public CUI(EventList eventList) {
 		this.eventList = eventList;
 		menu();
 	}
 	
+	/**
+	 * metoda wyswietlająca menu uzytwonika.
+	 */
 	public void printMenu() {
 		System.out.println("Calendar:");
 		System.out.println("a - add event");
 		System.out.println("r - remove event");
 		System.out.println("p - prints out list of events");
-		
-		
+		System.out.println("i - impotrs list from a file");
+		System.out.println("e - exports list to a file");
 		System.out.println("q - quits the program");
 		System.out.println("Enter your command:");
 	}
 
+	/**
+	 * metoda zajmująca sie wyborem użytkownika.
+	 */
 	public void menu() {
 		while(true) {
 			printMenu();
@@ -64,6 +79,10 @@ public class CUI {
 		}
 	}
 
+	/**
+	 * Metoda zajmujaca sie wyborem formatu, do ktorego zostanie wyeksportowana lista wydarzeń. 
+	 * @throws Exception
+	 */
 	private void menuExport() throws Exception {
 		
 		Scanner scanner =  new Scanner(System.in);
@@ -81,6 +100,10 @@ public class CUI {
 		scanner.close();
 	}
 
+	/**
+	 * Metoda zajmująca sie wyborem z jakiego formatu będzie importowana lista wydarzeń.
+	 * @throws Exception
+	 */
 	private void menuImport() throws Exception {
 		Scanner scanner =  new Scanner(System.in);
 		String c = scanner.next("[a-z]");
@@ -97,6 +120,10 @@ public class CUI {
 		scanner.close();
 	}
 
+	/** 
+	 * Funkcja zbierająca dane do doanaia wydarzenia
+	 * @return wydarzenie dodawane do listy
+	 */
 	private Event addEvent() {
 		System.out.println("Write name:");
 		@SuppressWarnings("resource")

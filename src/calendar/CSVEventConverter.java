@@ -8,9 +8,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
+/**
+ * Klasa obsługująca zapis i odczyt - format CSV
+ *
+ */
 public class CSVEventConverter {
+	/**
+	 * Zapisuje Listę wydarzeń do pliku .csv
+	 * @param eventList lista plików
+	 * @throws Exception
+	 */
 	public static void CSVwrite(EventList eventList) throws Exception{
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("export.csv")));
@@ -36,6 +44,11 @@ public class CSVEventConverter {
 		}
 	}
 	
+	/**
+	 * Odczytuje listę wydarzeń z pliku .csv
+	 * @return oczytana list wydarzeń
+	 * @throws Exception
+	 */
 	public static EventList CSVRead() throws Exception {
 		EventList buff = new EventList();
 		try {

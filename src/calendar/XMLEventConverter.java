@@ -7,14 +7,14 @@ import java.io.FileOutputStream;
 import java.util.Vector;
 
 /**
- * Obs�uguje zapis i odczyt wydarze� do i z pliku export.xml
+ * Obsługuje zapis i odczyt wydarze� do i z pliku export.xml
  */
 public class XMLEventConverter {
 
 	/**
 	 * Zapisuje wszystkie wydarzenia do pliku export.xml
 	 * 
-	 * @param events Lista wszystkich wydarze� do zapisania
+	 * @param events Lista wszystkich wydarzeń do zapisania
 	 * @throws Exception
 	 */
 	public static void writeXML(Vector<Event> events) throws Exception {
@@ -34,6 +34,11 @@ public class XMLEventConverter {
 		}
 	}
 
+	/**
+	 * Odczyt z pliku .xml
+	 * @return odczytana lista
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	public static Vector<Event> readXML() throws Exception {
 		Vector<Event> events = new Vector<Event>();

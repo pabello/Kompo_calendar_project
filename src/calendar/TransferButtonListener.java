@@ -3,11 +3,10 @@ package calendar;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Calendar;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+/**
+ * Implementacja intefejsu MouseListener dla przycisków zapisu i odczytu do plików.
+ */
 public class TransferButtonListener implements MouseListener {
 	final int buttonNumber;
 	

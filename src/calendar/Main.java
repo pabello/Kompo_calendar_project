@@ -4,7 +4,11 @@ import java.util.Calendar;
 
 import javax.swing.SwingUtilities;
 
-
+/**
+ * 
+ * Klasa służaca do uruchomienia programu.
+ *
+ */
 public class Main {
 
 	private static String username = "mordekaiser";

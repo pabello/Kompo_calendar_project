@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * Klasa okna opcji.
+ */
 public class OptionWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JPanel master;
@@ -21,12 +25,19 @@ public class OptionWindow extends JFrame {
 	JPanel csvHolder;
 	CalendarView calendarRef;
 	
+	/**
+	 * Konstuktor okna opcji.
+	 * @param calendar Okno kaledarza krÃ³rego dotyczy okno opcji.
+	 */
 	public OptionWindow(CalendarView calendar) {
 		super("Options");
 		this.calendarRef = calendar;
 		init();
 	}
-		
+	
+	/**
+	 * Funkcja rysujÄ…ca okno opcji.
+	 */
 	private void init() {
 		this.setVisible(true);
 		
@@ -39,7 +50,7 @@ public class OptionWindow extends JFrame {
 		
 		JCheckBox darkThemedBox = new JCheckBox("Dark themed mode", CalendarView.darkThemed);
 		darkThemedBox.setBackground(Color.LIGHT_GRAY);
-//		darkThemedBox.setForeground(new Color(255,237,15)); // z³oty kolor, ¿eby by³o widaæ, ¿e premium apka xd		problem w tym, ze jes s³abo widoczny xdd
+//		darkThemedBox.setForeground(new Color(255,237,15)); // zï¿½oty kolor, ï¿½eby byï¿½o widaï¿½, ï¿½e premium apka xd		problem w tym, ze jes sï¿½abo widoczny xdd
 		darkThemedBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

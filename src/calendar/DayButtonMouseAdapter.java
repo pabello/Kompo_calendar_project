@@ -6,6 +6,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 
+/**
+ * 
+ * Implementacja interfejsu MouseAdapter dla DayButton;
+ *
+ */
 public class DayButtonMouseAdapter extends MouseAdapter{
 	boolean isThisDayToday;
 	

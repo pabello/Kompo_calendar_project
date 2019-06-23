@@ -19,12 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * Klasa tworząca okno do dodawania Wydarzeń do listy
+ *
+ */
 public class AddEventView extends JFrame{
 
-	
-	  /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ButtonPanel btnPanel;
 	private InputPanel inptPanel;
@@ -32,6 +32,11 @@ public class AddEventView extends JFrame{
 	private JPanel master, msgPanel;
 	private JLabel msgLabel;
 
+	/**
+	 * Kontrutor tworzący okno
+	 * @param events Lista wydarzeń do której bedzie dodawane wydarzenie
+	 * @param date Data wydarzenia która bedzie dodawana
+	 */
 	public AddEventView(EventList  events, Date date) {
 			super("Add Event");
 			this.events = events;
@@ -116,6 +121,9 @@ public class AddEventView extends JFrame{
 	        colorUpdate();
 	}
 	
+	/**
+	 * Metoda zmieniająca kolory w zależności od ustawień
+	 */
 	public void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			master.setBackground(Color.DARK_GRAY);
@@ -136,10 +144,13 @@ public class AddEventView extends JFrame{
 
 }
 
+/**
+ * 
+ * Klasa przechowująca panel w którym podawane są dane do podania
+ *
+ */
 class InputPanel extends JPanel{ 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JTextField hourTf, minutesTf, nameTf, placeTf;
 	private JPanel yearPanel, monthPanel, dayPanel, hourPanel, minutesPanel, namePanel, placePanel, alarmMinutesPanel, alarmHourPanel;
@@ -152,6 +163,11 @@ class InputPanel extends JPanel{
 	private JPanel event;
 	private JPanel alarm;
 	
+	
+	/**
+	 * Konstrutor tworzący panel
+	 * @param date data wydarzenia które jest dodawane
+	 */
 	public InputPanel(Date date) {
 		super();
 		this.setLayout(new BorderLayout());
@@ -249,18 +265,35 @@ class InputPanel extends JPanel{
 		this.add(alarm);
 	}
 	
+	/**
+	 * Getter podanego roku
+	 * @return podany rok
+	 */
 	public int getYearInput() {
 		return this.c.get(Calendar.YEAR);
 	}
 	
+	/**
+	 * Getter podanego miesiaca
+	 * @return podany miesiąc
+	 */
 	public int getMonthInput() {
 		return this.c.get(Calendar.MONTH);
 	}
 	
+	/**
+	 * Getter podanego dnia
+	 * @return podany dzień
+	 */
 	public int getDayInput() {
 		return this.c.get(Calendar.DAY_OF_MONTH);
 	}
 	
+	/**
+	 * Getter Podanej godziny
+	 * @return podaną godzinę
+	 * @throws NoSuchElementException
+	 */
 	public int getHourInput() throws NoSuchElementException {
 		Scanner s = new Scanner(hourTf.getText());
 		int buff = s.nextInt();
@@ -269,6 +302,11 @@ class InputPanel extends JPanel{
 		return buff;
 	}
 	
+	/**
+	 * Getter podanej minuty 
+	 * @return Podana minuta
+	 * @throws NoSuchElementException
+	 */
 	public int getMinutesInput() throws NoSuchElementException {
 		Scanner s = new Scanner(minutesTf.getText());
 		int buff = s.nextInt();
@@ -277,10 +315,25 @@ class InputPanel extends JPanel{
 		return buff;
 	}
 	
+	/**
+	 * Getter podanej nazwy
+	 * @return Podana nazwa
+	 */
+	public String getNameInput() {
+		return this.nameTf.getText();
+	}
+	
+	/**
+	 * Getter podanego miejsca
+	 * @return Podane miejsce
+	 */
 	public String getPlaceInput() {
 		return this.placeTf.getText();
 	}
 	
+	/** 
+	 * Metoda ustawiająca kolory zgodnie z ustwaieniami
+	 */
 	public void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			Color color = new Color(81,81,81);
@@ -359,23 +412,35 @@ class InputPanel extends JPanel{
 	}
 }
 
+/**
+ * 
+ * Klasa panelu przechowującego przyciski
+ *
+ */
 class ButtonPanel extends JPanel{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JButton addBtn, listBtn, cancelBtn;
 	
+	/**
+	 * Getter przycisku do doadawania wydarzeń
+	 * @return przycisk do dodawania wydarzeń
+	 */
 	public JButton getAddBtn() {
 		return addBtn;
 	}
-	public JButton getListBtn() {
-		return listBtn;
-	}
+	
+	/**
+	 * Getter Przycisku anulującego dadanie eventu
+	 * @return przycisk "anuluj"
+	 */
 	public JButton getCancelBtn() {
 		return cancelBtn;
 	}
 	
+	/**
+	 * Konstruktor panelu z przyciskami
+	 */
 	public ButtonPanel(){
 		//setBorder(BorderFactory.createLineBorder(Color.black));
 		super();
@@ -399,6 +464,9 @@ class ButtonPanel extends JPanel{
 		this.add(cancelBtn);		
 	}
 	
+	/**
+	 * Metoda zmieniająca kolory według ustawień 
+	 */
 	public void colorUpdate() {
 		if(CalendarView.darkThemed) {
 			Color color = new Color(81,81,81);
@@ -416,6 +484,10 @@ class ButtonPanel extends JPanel{
 	}
 }
 
+/**
+ * 
+ * Wyjątek rzucany jesli podana godzina lub minuta jest niepoprawna
+ */
 class WrongTimeException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

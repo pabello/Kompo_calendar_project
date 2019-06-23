@@ -2,6 +2,10 @@ package calendar;
 
 import java.sql.*;
 
+/**
+ * Klasa łącząca program z baza danych.
+ *
+ */
 public class JDBC {
 	String connectionParameters;
 	String username;
@@ -15,11 +19,20 @@ public class JDBC {
 	String readString;
 	String writeString;
 	
+	/**
+	 * Kontruktor konektora.
+	 */
 	JDBC() {
 		connectionParameters = ("jdbc:mysql://127.0.0.1/calendar_events?user=luser&password=Hexagonal_User1&serverTimezone=Etc/GMT-1");
 		this.username = Main.getUsername();
 	}
 	
+	/**
+	 * Metoda Czytająca liste wydarzeń z listy.
+	 * @return odczytana z bazy lista wydarzeń.
+	 * @throws SQLException
+	 * @throws Exception
+	 */
 	EventList read() throws SQLException, Exception {
 		EventList eventList = new EventList();
 		String readString = "SELECT * FROM `" + username + "`";
@@ -48,6 +61,11 @@ public class JDBC {
 		return eventList;
 	}
 	
+	
+	/**
+	 * Metoda czyszcząca bazę danych.
+	 * @throws SQLException
+	 */
 	void drop() throws SQLException {
 		String dropString = "DROP TABLE IF EXISTS " + username;
 		
@@ -71,6 +89,10 @@ public class JDBC {
 		}
 	}
 	
+	/**
+	 * Metoda tworząca tebelę w bazie.	
+	 * @throws SQLException
+	 */
 	void create() throws SQLException {
 		String createString = "CREATE OR REPLACE TABLE `" +username+ "` ("
 				+ "`event_name` VARCHAR (100) NOT NULL, "
@@ -96,6 +118,9 @@ public class JDBC {
 		}
 	}
 	
+	/*
+	 * Tabela wstawiająca dane do tabeli
+	 */
 	void insert() throws SQLException {
 		String insertString = "INSERT INTO " +username+ " (`event_name`, `event_place`, `event_time`)"
 				+ " VALUES (?, ?, ?)";
