@@ -64,7 +64,9 @@ public class AddEventView extends JFrame{
 									inptPanel.getMonthInput(),
 									inptPanel.getDayInput(),
 									inptPanel.getHourInput(),
-									inptPanel.getMinutesInput()));
+									inptPanel.getMinutesInput(),
+									inptPanel.getAlarmHourInput(),
+									inptPanel.getAlarmMinutesInput()));
 									setVisible(false);
 									CalendarView.dayView.updateList();
 									dispose();
@@ -76,7 +78,9 @@ public class AddEventView extends JFrame{
 									inptPanel.getMonthInput(),
 									inptPanel.getDayInput(),
 									inptPanel.getHourInput(),
-									inptPanel.getMinutesInput()));
+									inptPanel.getMinutesInput(),
+									inptPanel.getAlarmHourInput(),
+									inptPanel.getAlarmMinutesInput()));
 									CalendarView.dayView.updateList();
 									setVisible(false);
 									dispose();
@@ -289,11 +293,22 @@ class InputPanel extends JPanel{
 		return this.c.get(Calendar.DAY_OF_MONTH);
 	}
 	
-	/**
-	 * Getter Podanej godziny
-	 * @return podaną godzinę
-	 * @throws NoSuchElementException
-	 */
+	public int getAlarmHourInput() throws NoSuchElementException {
+		Scanner s = new Scanner(hourTf.getText());
+		int buff = s.nextInt();
+		s.close();
+		if((buff < 0) || (buff > 23)) throw new WrongTimeException("Hours take values between 0 and 23!");
+		return buff;
+	}
+	
+	public int getAlarmMinutesInput() throws NoSuchElementException {
+		Scanner s = new Scanner(minutesTf.getText());
+		int buff = s.nextInt();
+		s.close();
+		if((buff < 0) || (buff > 59)) throw new WrongTimeException("Minutes take values between 0 and 59!");
+		return buff;
+	}
+	
 	public int getHourInput() throws NoSuchElementException {
 		Scanner s = new Scanner(hourTf.getText());
 		int buff = s.nextInt();
@@ -315,10 +330,6 @@ class InputPanel extends JPanel{
 		return buff;
 	}
 	
-	/**
-	 * Getter podanej nazwy
-	 * @return Podana nazwa
-	 */
 	public String getNameInput() {
 		return this.nameTf.getText();
 	}

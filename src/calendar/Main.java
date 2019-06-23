@@ -1,6 +1,7 @@
 package calendar;
 
 import java.util.Calendar;
+import java.util.Timer;
 
 import javax.swing.SwingUtilities;
 
@@ -12,6 +13,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
 	private static String username = "mordekaiser";
+	static Timer timer = new Timer("calendar_timer", true); 
 	static boolean gui = true;
 	
     public static void main(String[] args) {

@@ -18,6 +18,7 @@ public class Event implements Comparable <Event>, Serializable{
 	private String name;
 	private String place;
 	private Date eventTime;
+	private Date alarmTime;
 
 	/**
 	 * Kostruktor bezparametrowy niezbędny do zapisu w formacie .xml
@@ -26,39 +27,34 @@ public class Event implements Comparable <Event>, Serializable{
 		super();
 	}
 	
-	/**
-	 * Konstruktor twąrzący wydarzenie bez podaniego miejsca, data podana jako liczby całkowite
-	 * @param name Nazwa wydarzenia
-	 * @param year Rok w którym odbywa się wydarzenie
-	 * @param month Miesiąc w którym odbywa się wydarzenie
-	 * @param day Dzień w miesiącu w którym odbywa się wydarzenie
-	 * @param hour Godzina o której rozpoczyna sie wydarzenie 
-	 * @param minutes Minuta w ktorej rozpoczyna się wydarzenie
-	 */
-	public Event(String name, int year, int month, int day, int hour, int minutes) {
+	public Event(String name, int year, int month, int day, int hour, int minutes, int alarmHours, int alarmMinutes) {
 		this.name = name;
 		this.place = " ";
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
+		if(alarmHours != 0 || alarmMinutes != 0) {
+			c.add(Calendar.HOUR, -alarmHours);
+			c.add(Calendar.MINUTE, -alarmMinutes);
+			alarmTime = c.getTime();
+		} else {
+			alarmTime = null;
+		}
 	}
 	
-	/**
-	 * Konstruktor Konstruktor twąrzący wydarzenie z podanym miejscem, data podana jako liczby całkowite
-	 * @param name Nazwa wydarznia
-	 * @param place Miejsce wydarzenia
-	 * @param year Rok w którym odbywa się wydarzenie
-	 * @param month Miesiąc w którym odbywa się wydarzenie
-	 * @param day Dzień w miesiącu w którym odbywa się wydarzenie
-	 * @param hour Godzina o której rozpoczyna sie wydarzenie 
-	 * @param minutes Minuta w ktorej rozpoczyna się wydarzenie
-	 */
-	public Event(String name, String place, int year, int month, int day, int hour, int minutes) {
+	public Event(String name, String place, int year, int month, int day, int hour, int minutes, int alarmHours, int alarmMinutes) {
 		this.name = name;
 		this.place = place;
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
+		if(alarmHours != 0 || alarmMinutes != 0) {
+			c.add(Calendar.HOUR, -alarmHours);
+			c.add(Calendar.MINUTE, -alarmMinutes);
+			alarmTime = c.getTime();
+		} else {
+			alarmTime = null;
+		}
 	}
 	/**
 	 * Konstruktor tworzący wydarzenie z podanym jescem, data podana jako obiekt.
