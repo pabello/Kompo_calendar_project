@@ -39,7 +39,7 @@ public class OptionWindow extends JFrame {
 		
 		JCheckBox darkThemedBox = new JCheckBox("Dark themed mode", CalendarView.darkThemed);
 		darkThemedBox.setBackground(Color.LIGHT_GRAY);
-//		darkThemedBox.setForeground(new Color(255,237,15)); // z³owy kolor, ¿eby by³o widaæ, ¿e premium apka xd
+//		darkThemedBox.setForeground(new Color(255,237,15)); // zï¿½owy kolor, ï¿½eby byï¿½o widaï¿½, ï¿½e premium apka xd
 		darkThemedBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -49,16 +49,16 @@ public class OptionWindow extends JFrame {
 		});
 		darkThemedBox.setHorizontalAlignment(SwingConstants.CENTER);
 
-		ImageIcon dbImportIcon = new ImageIcon("C:\\Users\\user\\Desktop\\Kompo\\trunk\\Projekt\\Kompo_calendar_project\\images\\dbimport32.png");
+		ImageIcon dbImportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/dbimport32.png");
 		JLabel dbImport = new JLabel("Import", dbImportIcon, SwingConstants.CENTER);
 		dbImport.setToolTipText("Import events from database");
-		ImageIcon dbExportIcon = new ImageIcon("C:\\Users\\user\\Desktop\\Kompo\\trunk\\Projekt\\Kompo_calendar_project\\images\\dbexport32.png");
+		ImageIcon dbExportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/dbexport32.png");
 		JLabel dbExport = new JLabel("Export", dbExportIcon, SwingConstants.CENTER);
 		dbExport.setToolTipText("Export events to database");
-		ImageIcon xmlImportIcon = new ImageIcon("C:\\Users\\user\\Desktop\\Kompo\\trunk\\Projekt\\Kompo_calendar_project\\images\\xmlimport32.png");
+		ImageIcon xmlImportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/xmlimport32.png");
 		JLabel xmlImport = new JLabel("Import", xmlImportIcon, SwingConstants.CENTER);
 		xmlImport.setToolTipText("Import events from XML sheet");
-		ImageIcon xmlExportIcon = new ImageIcon("C:\\Users\\user\\Desktop\\Kompo\\trunk\\Projekt\\Kompo_calendar_project\\images\\xmlexport32.png");
+		ImageIcon xmlExportIcon = new ImageIcon("/home/andrzej/git/Kompo_calendar_project/images/xmlexport32.png");
 		JLabel xmlExport = new JLabel("Export", xmlExportIcon, SwingConstants.CENTER);
 		xmlExport.setToolTipText("Export events to XML sheet");
 		management.add(xmlExport);
