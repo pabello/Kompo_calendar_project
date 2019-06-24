@@ -5,16 +5,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
+import javax.swing.ScrollPaneConstants;
+
 
 /**
  * Klasa wyświetlająca listę wydarzeń w dniu
@@ -65,15 +71,30 @@ public class DayView extends JFrame {
 		add.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(a != null)
+					a.dispose();
 				a = new AddEventView(v, date);
 			}
 		});
+		add.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK), "newEvent");
+		add.getActionMap().put("newEvent", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(a != null)
+					a.dispose();
+				a = new AddEventView(v, date);
+			}
+		});
+		master.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "closeWindow");
+		master.getActionMap().put("closeWindow", new CloseWindowAction(this));
 		
 		remove = new JButton("Remove");
 		remove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!DayView.this.l.isSelectionEmpty()) {
+					DayView.this.l.getSelectedValue().cancelReminder();
 					DayView.this.v.remove(DayView.this.l.getSelectedValue());
 					DayView.this.lm.removeElement(DayView.this.l.getSelectedValue());
 					updateList();
@@ -81,6 +102,21 @@ public class DayView extends JFrame {
 				a = new AddEventView(v, date);
 			}
 		});	
+		
+		remove.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "deleteEvent");
+		remove.getActionMap().put("deleteEvent", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!DayView.this.l.isSelectionEmpty()) {
+					DayView.this.l.getSelectedValue().cancelReminder();
+					DayView.this.v.remove(DayView.this.l.getSelectedValue());
+					DayView.this.lm.removeElement(DayView.this.l.getSelectedValue());
+					updateList();
+				}
+			}
+		});
 		
 		this.add(s, BorderLayout.CENTER);
 		master.add(add);

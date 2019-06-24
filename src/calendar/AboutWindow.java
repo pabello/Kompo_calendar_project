@@ -28,12 +28,12 @@ public class AboutWindow extends JFrame {
 		super("About");
 		
 		master = new JPanel();
-		authors = new JLabel("<html><b>Authors of this calendar are</b><br>   Andrzej �abski<br>   Pawe� Wac�awiak</html>");
+		authors = new JLabel("<html><b>Authors of this calendar are</b><br>   Andrzej Zabski<br>   Pawel Waclawiak</html>");
 		description = new JLabel("<html>The application is still in its Beta version and it's licenced as Freeware, although we are considering changing it to Beerware after final release.</html>");
 		Font font = description.getFont();
 		authors.setFont(font.deriveFont(Font.PLAIN));
 		description.setFont(font.deriveFont(Font.PLAIN));
-		copyright = new JLabel("<html>Copyright � 2019 by �abcia Ltd. All rights reserved.</html>");
+		copyright = new JLabel("<html>Copyright © 2019 by Zabcia Ltd. All rights reserved.</html>");
 		
 		master.setLayout(new BorderLayout());
 		master.add(authors, BorderLayout.NORTH);

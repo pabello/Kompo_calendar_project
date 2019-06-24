@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimerTask;
 /**
  * 
  * Klasa reprezentująca wydarzenie
@@ -18,12 +19,8 @@ public class Event implements Comparable <Event>, Serializable{
 	private String name;
 	private String place;
 	private Date eventTime;
-	private Date alarmTime;
-
-	public void setAlarmTime(Date alarmTime) {
-		this.alarmTime = alarmTime;
-	}
-
+	private Date alarmTime = null;
+	private TimerTask eventReminder = null;
 	/**
 	 * Kostruktor bezparametrowy niezbędny do zapisu w formacie .xml
 	 */
@@ -48,12 +45,16 @@ public class Event implements Comparable <Event>, Serializable{
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
-		if(alarmHours != 0 || alarmMinutes != 0) {
+		if(((alarmHours != 0) || (alarmMinutes != 0)) && (eventTime.getTime() > System.currentTimeMillis())) {
 			c.add(Calendar.HOUR, -alarmHours);
 			c.add(Calendar.MINUTE, -alarmMinutes);
 			alarmTime = c.getTime();
+			eventReminder = new EventReminder(name, eventTime);
 		} else {
 			alarmTime = null;
+		}
+		if(eventReminder != null) {
+			setReminder();
 		}
 	}
 	
@@ -63,12 +64,16 @@ public class Event implements Comparable <Event>, Serializable{
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, day, hour, minutes, 0);
 		eventTime = c.getTime();
-		if(alarmHours != 0 || alarmMinutes != 0) {
+		if(((alarmHours != 0) || (alarmMinutes != 0)) && (eventTime.getTime() > System.currentTimeMillis())) {
 			c.add(Calendar.HOUR, -alarmHours);
 			c.add(Calendar.MINUTE, -alarmMinutes);
 			alarmTime = c.getTime();
+			eventReminder = new EventReminder(name, eventTime);
 		} else {
 			alarmTime = null;
+		}
+		if(eventReminder != null) {
+			setReminder();
 		}
 	}
 	/**
@@ -77,10 +82,19 @@ public class Event implements Comparable <Event>, Serializable{
 	 * @param place miejśce wydarzenia
 	 * @param date Data wydarzenia
 	 */
-	public Event(String name, String place, Date date) {
+	public Event(String name, String place, Date date, Date alarmTime) {
 		this.name = name;
 		this.place = place;
 		this.eventTime = date;
+		this.alarmTime = alarmTime;
+		if((alarmTime != null) && (eventTime.getTime() > System.currentTimeMillis())) {
+			eventReminder = new EventReminder(name, eventTime);
+		} else {
+			alarmTime = null;
+		}
+		if(eventReminder != null) {
+			setReminder();
+		}
 	}
 	
 	/**
@@ -88,9 +102,19 @@ public class Event implements Comparable <Event>, Serializable{
 	 * @param name nazwa wydarzenia	
 	 * @param date Data wydarzenia
 	 */
-	public Event(String name, Date date) {
+	public Event(String name, Date date, Date alarmTime) {
 		this.name = name;
+		this.place = "Unknown";
 		this.eventTime = date;
+		this.alarmTime = alarmTime;
+		if((alarmTime != null) && (eventTime.getTime() > System.currentTimeMillis())) {
+			eventReminder = new EventReminder(name, eventTime);
+		} else {
+			alarmTime = null;
+		}
+		if(eventReminder != null) {
+			setReminder();
+		}
 	}
 
 	/**
@@ -99,13 +123,29 @@ public class Event implements Comparable <Event>, Serializable{
 	 * @param place Miejsce wydarzenia
 	 * @param date Data wydarzenia
 	 */
-	public Event(String name, String place, String date) {
+	public Event(String name, String place, String date, String alarmTime) {
 		this.name = name;
 		this.place = place;
 		try {
-			this.eventTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(date);
+			this.eventTime = new SimpleDateFormat("dd-MM-yyyy HH:mm").parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
+		}
+		try {
+			if(alarmTime.equals("null"))
+				this.alarmTime = null;
+			else
+				this.alarmTime = new SimpleDateFormat("dd-MM-yyyy HH:mm").parse(alarmTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if((this.alarmTime != null) && (eventTime.getTime() > System.currentTimeMillis())) {
+			eventReminder = new EventReminder(name, eventTime);
+		} else {
+			alarmTime = null;
+		}
+		if(eventReminder != null) {
+			setReminder();
 		}
 	}
 	
@@ -217,5 +257,21 @@ public class Event implements Comparable <Event>, Serializable{
 	@Override
 	public int compareTo(Event arg0) {
 		return this.getEventTime().compareTo(arg0.getEventTime());
+	}
+
+	/**
+	 * Getter czasu alarmu.
+	 * @return czas alarmu.
+	 */
+	public Date getAlarmTime() {
+		return alarmTime;
+	}
+
+	void setReminder() {
+		Main.timer.schedule(eventReminder, alarmTime);
+	}
+	void cancelReminder() {
+		if(eventReminder != null)
+			eventReminder.cancel();
 	}
 }

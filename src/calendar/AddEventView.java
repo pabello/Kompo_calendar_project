@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -13,10 +14,12 @@ import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 /**
@@ -81,8 +84,8 @@ public class AddEventView extends JFrame{
 									inptPanel.getMinutesInput(),
 									inptPanel.getAlarmHourInput(),
 									inptPanel.getAlarmMinutesInput()));
-									CalendarView.dayView.updateList();
 									setVisible(false);
+									CalendarView.dayView.updateList();
 									dispose();
 							}
 						} else if (inptPanel.getNameInput().equals("")) {
@@ -115,9 +118,11 @@ public class AddEventView extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					// TODO dispose on pressing
 					AddEventView.this.dispose();
-				}
-	        	
+				}	
 	        });
+
+	        master.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "closeWindow");
+	        master.getActionMap().put("closeWindow", new CloseWindowAction(this));
 
 	        this.add(master);
 	        this.pack();
@@ -294,7 +299,7 @@ class InputPanel extends JPanel{
 	}
 	
 	public int getAlarmHourInput() throws NoSuchElementException {
-		Scanner s = new Scanner(hourTf.getText());
+		Scanner s = new Scanner(alarmHourTf.getText());
 		int buff = s.nextInt();
 		s.close();
 		if((buff < 0) || (buff > 23)) throw new WrongTimeException("Hours take values between 0 and 23!");
@@ -302,7 +307,7 @@ class InputPanel extends JPanel{
 	}
 	
 	public int getAlarmMinutesInput() throws NoSuchElementException {
-		Scanner s = new Scanner(minutesTf.getText());
+		Scanner s = new Scanner(alarmMinutesTf.getText());
 		int buff = s.nextInt();
 		s.close();
 		if((buff < 0) || (buff > 59)) throw new WrongTimeException("Minutes take values between 0 and 59!");

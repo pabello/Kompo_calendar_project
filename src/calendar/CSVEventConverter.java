@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Klasa obsługująca zapis i odczyt - format CSV
@@ -30,6 +31,13 @@ public class CSVEventConverter {
 				line.append(';');
 				line.append( new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(event.getEventTime()));
 				line.append(';');
+				if(event.getAlarmTime() != null) {
+					line.append( new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(event.getAlarmTime()));
+					line.append(';');					
+				} else {
+					line.append("null");
+					line.append(";");
+				}
 				bw.write(line.toString());
 				bw.newLine();
 			}
@@ -56,7 +64,7 @@ public class CSVEventConverter {
 			String line = "";
 			while((line = br.readLine())!= null) {
 				String[] params = line.split(";");
-				Event event = new Event(params[0], params[1], params[2]);
+				Event event = new Event(params[0], params[1], params[2], params[3]);
 				buff.add(event);
 			}
 		} catch (FileNotFoundException e) {

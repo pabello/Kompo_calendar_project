@@ -104,8 +104,8 @@ public class CalendarView extends JFrame{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			 calendarInstance.setTime(realCurrentDate);
-				 update();
+			 	calendarInstance.setTime(realCurrentDate);
+				update();
 				
 			}
 			public void mousePressed(MouseEvent e) {}
@@ -143,6 +143,8 @@ public class CalendarView extends JFrame{
 		menuIconLabel.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(winnie != null)
+					winnie.dispose();
 				winnie = new OptionWindow(CalendarView.this);
 			}
 			public void mousePressed(MouseEvent e) {}

@@ -44,7 +44,7 @@ public class JDBC {
 			ResultSet rs = stmt.executeQuery(readString);
 			
 			while(rs.next()) {
-				Event event = new Event(rs.getString(1), rs.getString(2), new Date((rs.getTimestamp(3).getTime())));
+				Event event = new Event(rs.getString(1), rs.getString(2), new Date((rs.getTimestamp(3).getTime())), (rs.getTimestamp(4) != null) ? new Date((rs.getTimestamp(4).getTime())) : null);
 				eventList.add(event);
 			}
 			
@@ -93,25 +93,27 @@ public class JDBC {
 	 * Metoda tworząca tebelę w bazie.	
 	 * @throws SQLException
 	 */
-	void create() throws SQLException {
+	void create() throws SQLException, Exception {
 		String createString = "CREATE OR REPLACE TABLE `" +username+ "` ("
 				+ "`event_name` VARCHAR (100) NOT NULL, "
 				+ "`event_place` VARCHAR (50) NULL, "
-				+ "`event_time` TIMESTAMP NOT NULL);";
+				+ "`event_time` TIMESTAMP NOT NULL,"
+				+ "`alarm_time` TIMESTAMP NULL DEFAULT NULL);";
 		
 		try {
 			conn = DriverManager.getConnection(connectionParameters, databaseUsername, databasePassword);
 			conn.setAutoCommit(false);
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Statement stmt = conn.createStatement();
-			System.out.println(createString);
 			stmt.execute(createString);
 			conn.commit();
 		} catch (SQLException sqle) {
 			System.out.println("Could not acces the database.");
 			System.out.println(sqle.getMessage());
+			throw new Exception("Could not connect to the database.");
 		} catch (ClassNotFoundException cnfe) {
 			System.out.println("Could not load SQL driver.");
+			throw new Exception("Could not connect to the database.");
 		} finally {
 			conn.setAutoCommit(true);
 			conn.close();
@@ -121,9 +123,9 @@ public class JDBC {
 	/*
 	 * Tabela wstawiająca dane do tabeli
 	 */
-	void insert() throws SQLException {
-		String insertString = "INSERT INTO " +username+ " (`event_name`, `event_place`, `event_time`)"
-				+ " VALUES (?, ?, ?)";
+	void insert() throws SQLException, Exception {
+		String insertString = "INSERT INTO " +username+ " (`event_name`, `event_place`, `event_time`, `alarm_time`)"
+				+ " VALUES (?, ?, ?, ?)";
 		
 		try {
 			conn = DriverManager.getConnection(connectionParameters, databaseUsername, databasePassword);
@@ -137,13 +139,20 @@ public class JDBC {
 				System.out.println("eventPlace=" + event.getPlace());
 				writeStatement.setString(2, event.getPlace());
 				writeStatement.setTimestamp(3, new Timestamp(event.getEventTime().getTime()));
+				System.out.println(event.getAlarmTime());
+				if(event.getAlarmTime() != null)
+					writeStatement.setTimestamp(4, new Timestamp(event.getAlarmTime().getTime()));
+				else 
+					writeStatement.setTime(4, null);
 				writeStatement.executeUpdate();
 				conn.commit();
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Could not acces the database.");
+			throw new Exception("Could not connect to the database.");
 		} catch (ClassNotFoundException cnfe) {
 			System.out.println("Could not load SQL driver.");
+			throw new Exception("Could not connect to the database.");
 		} finally {
 			conn.setAutoCommit(true);
 			conn.close();
