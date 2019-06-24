@@ -98,35 +98,27 @@ public class SearchWindow extends JFrame{
 	public void updateColor() {
 		if(CalendarView.darkThemed) {
 			this.foundList.setBackground(Color.DARK_GRAY);
-			this.searchBtn.setBackground(Color.DARK_GRAY);
 			this.search.setBackground(Color.DARK_GRAY);
 			this.searchPattern.setBackground(Color.DARK_GRAY);
-			this.remove.setBackground(Color.DARK_GRAY);
 			this.removeDate.setBackground(Color.DARK_GRAY);
 			this.removePanel.setBackground(Color.DARK_GRAY);
 				
 			this.foundList.setForeground(Color.WHITE);
-			this.searchBtn.setForeground(Color.WHITE);
 			this.search.setForeground(Color.WHITE);
 			this.searchPattern.setForeground(Color.WHITE);
-			this.remove.setForeground(Color.WHITE);
 			this.removeDate.setForeground(Color.WHITE);
 			this.removePanel.setForeground(Color.WHITE);
 		} else {
 			Color color = new Color(238, 238, 238);
 			this.foundList.setBackground(color);
-			this.searchBtn.setBackground(color);
 			this.search.setBackground(color);
 			this.searchPattern.setBackground(color);
-			this.remove.setBackground(color);
 			this.removeDate.setBackground(color);
 			this.removePanel.setBackground(color);
 				
 			this.foundList.setForeground(Color.BLACK);
-			this.searchBtn.setForeground(Color.BLACK);
 			this.search.setForeground(Color.BLACK);
 			this.searchPattern.setForeground(Color.BLACK);
-			this.remove.setForeground(Color.BLACK);
 			this.removeDate.setForeground(Color.BLACK);
 			this.removePanel.setForeground(Color.BLACK);
 		}

@@ -369,8 +369,8 @@ class InputPanel extends JPanel{
 			event.setBackground(Color.DARK_GRAY);
 			alarmMinutesPanel.setBackground(Color.DARK_GRAY);
 			alarmHourPanel.setBackground(Color.DARK_GRAY);
-			alarmHourTf.setBackground(Color.DARK_GRAY);
-			alarmMinutesTf.setBackground(Color.DARK_GRAY);
+			alarmHourTf.setBackground(color);
+			alarmMinutesTf.setBackground(color);
 			
 			nameTf.setForeground(Color.WHITE);
 			placeTf.setForeground(Color.WHITE);
@@ -404,8 +404,12 @@ class InputPanel extends JPanel{
 			placeTf.setBackground(Color.WHITE);
 			hourTf.setBackground(Color.WHITE);
 			minutesTf.setBackground(Color.WHITE);
-			alarm.setBackground(Color.WHITE);
-			event.setBackground(Color.WHITE);
+			alarm.setBackground(color);
+			event.setBackground(color);
+			alarmMinutesPanel.setBackground(color);
+			alarmHourPanel.setBackground(color);
+			alarmHourTf.setBackground(Color.WHITE);
+			alarmMinutesTf.setBackground(Color.WHITE);
 			
 			nameTf.setForeground(Color.BLACK);
 			placeTf.setForeground(Color.BLACK);
@@ -421,8 +425,10 @@ class InputPanel extends JPanel{
 			dayLabel2.setForeground(Color.BLACK);
 			hourLabel.setForeground(Color.BLACK);
 			minutesLabel.setForeground(Color.BLACK);
-			alarmHourLabel.setForeground(Color.black);
+			alarmHourLabel.setForeground(Color.BLACK);
 			alarmMinutesLabel.setForeground(Color.BLACK);
+			alarmHourTf.setForeground(Color.BLACK);
+			alarmMinutesTf.setForeground(Color.BLACK);
 			
 		}
 	}
