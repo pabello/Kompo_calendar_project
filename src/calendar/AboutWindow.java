@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 /**
  * 
  * Klasa tworząca okienko "O Programie"
@@ -47,6 +50,9 @@ public class AboutWindow extends JFrame {
 		this.add(master);
 		this.pack();
 		this.setVisible(true);
+
+        master.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "closeWindow");
+        master.getActionMap().put("closeWindow", new CloseWindowAction(this));
 	}
 	
 	/**

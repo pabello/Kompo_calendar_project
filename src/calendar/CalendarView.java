@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
@@ -19,12 +20,15 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 /**
@@ -139,6 +143,16 @@ public class CalendarView extends JFrame{
 		JLabel searchIconLabel = new JLabel(searchIcon);
 		JPanel leftIcons = new JPanel();
 		leftIcons.setLayout(new GridLayout(1,2,0,0));
+		
+        menuIconLabel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK), "openOptionsWindow");
+        menuIconLabel.getActionMap().put("openOptionsWindow", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+			public void actionPerformed(ActionEvent e) {
+				if(winnie != null)
+					winnie.dispose();
+				winnie = new OptionWindow(CalendarView.this);
+			}
+        });
 		
 		menuIconLabel.addMouseListener(new MouseListener() {
 			@Override

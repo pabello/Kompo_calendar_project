@@ -2,11 +2,14 @@ package calendar;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 public class TransferEffect extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +26,9 @@ public class TransferEffect extends JFrame {
 		
 		ImageIcon icon = new ImageIcon("images\\"+action+".png");
 		message = new JLabel(action, icon, JLabel.CENTER);
-		
+
+        master.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "closeWindow");
+        master.getActionMap().put("closeWindow", new CloseWindowAction(this));
 		master.setLayout(new java.awt.BorderLayout());
 		master.add(message, java.awt.BorderLayout.CENTER);
 		master.setPreferredSize(new java.awt.Dimension(200,120));
