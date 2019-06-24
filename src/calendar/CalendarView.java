@@ -51,7 +51,8 @@ public class CalendarView extends JFrame{
 	int currentYear;
 	
 	final Date realCurrentDate;
-	SimpleDateFormat todayFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.US);	
+	SimpleDateFormat todayFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
+	protected static SearchWindow searchWindow;	
 
 	/**
 	 * Konstrutor
@@ -103,7 +104,7 @@ public class CalendarView extends JFrame{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				 calendarInstance.setTime(realCurrentDate);
+			 calendarInstance.setTime(realCurrentDate);
 				 update();
 				
 			}
@@ -180,7 +181,8 @@ public class CalendarView extends JFrame{
 		searchIconLabel.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if(searchWindow!=null) searchWindow.dispose();
+				searchWindow = new SearchWindow(eventList);
 			}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}

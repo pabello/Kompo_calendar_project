@@ -20,6 +20,10 @@ public class Event implements Comparable <Event>, Serializable{
 	private Date eventTime;
 	private Date alarmTime;
 
+	public void setAlarmTime(Date alarmTime) {
+		this.alarmTime = alarmTime;
+	}
+
 	/**
 	 * Kostruktor bezparametrowy niezbędny do zapisu w formacie .xml
 	 */
@@ -27,6 +31,17 @@ public class Event implements Comparable <Event>, Serializable{
 		super();
 	}
 	
+	/**
+	 * Konstruktor twąrzący wydarzenie bez podaniego miejsca, data podana jako liczby całkowite.
+	 * @param name Nazwa wydarzenia.
+	 * @param year Rok w którym odbywa się wydarzenie.
+	 * @param month Miesiąc w którym odbywa się wydarzenie.
+	 * @param day Dzień w miesiącu w którym odbywa się wydarzenie.
+	 * @param hour Godzina o której rozpoczyna sie wydarzenie.
+	 * @param minutes Minuta w ktorej rozpoczyna się wydarzenie.
+	 * @param alarmHours ile godzin wcześniej ma być alarm.
+	 * @param alarmMinutes ile minut wcześniej ma być alarm.
+	 */
 	public Event(String name, int year, int month, int day, int hour, int minutes, int alarmHours, int alarmMinutes) {
 		this.name = name;
 		this.place = " ";

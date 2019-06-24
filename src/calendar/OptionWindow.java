@@ -156,6 +156,8 @@ public class OptionWindow extends JFrame {
 		}
 		if(CalendarView.about != null)
 			CalendarView.about.colorUpdate();
+		if(CalendarView.searchWindow != null)
+			CalendarView.searchWindow.updateColor();
 		init();
 	}
 }

@@ -3,46 +3,21 @@
  <object class="calendar.EventList">
   <void method="add">
    <object class="calendar.Event">
+    <void property="alarmTime">
+     <object class="java.util.Date">
+      <long>1560376800925</long>
+     </object>
+    </void>
     <void property="eventTime">
      <object class="java.util.Date">
-      <long>-62130488099660</long>
+      <long>1560420000925</long>
      </object>
     </void>
     <void property="name">
-     <string>aaaa</string>
+     <string>aaaaa</string>
     </void>
     <void property="place">
-     <string></string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="calendar.Event">
-    <void property="eventTime">
-     <object class="java.util.Date">
-      <long>-62127809699644</long>
-     </object>
-    </void>
-    <void property="name">
-     <string>aaaa</string>
-    </void>
-    <void property="place">
-     <string></string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="calendar.Event">
-    <void property="eventTime">
-     <object class="java.util.Date">
-      <long>-62125217699644</long>
-     </object>
-    </void>
-    <void property="name">
-     <string>aaaa</string>
-    </void>
-    <void property="place">
-     <string></string>
+     <string>aaaaa</string>
     </void>
    </object>
   </void>
