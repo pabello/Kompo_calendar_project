@@ -102,16 +102,6 @@ public class AddEventView extends JFrame{
 					}
 	        });
 	        
-	        btnPanel.getListBtn().addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					System.out.println(events.toString());
-				}
-	        	
-	        });
-	        
 	        btnPanel.getCancelBtn().addActionListener(new ActionListener() {
 
 				@Override
@@ -468,6 +458,7 @@ class ButtonPanel extends JPanel{
 		super();
 		addBtn = new JButton("Add");
 		cancelBtn = new JButton("Cancel");
+		
 		if(CalendarView.darkThemed) {
 			Color color = new Color(81,81,81);
 			addBtn.setBackground(color);
@@ -482,7 +473,6 @@ class ButtonPanel extends JPanel{
 			cancelBtn.setForeground(Color.BLACK);
 		}
 		this.add(addBtn);
-		this.add(listBtn);
 		this.add(cancelBtn);		
 	}
 	

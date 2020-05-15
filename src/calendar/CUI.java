@@ -154,6 +154,6 @@ public class CUI {
 		scanner = new Scanner(System.in);
 		int minute = scanner.nextInt();
 		
-		return new Event(name, place, year, month, day, hour, minute);
+		return new Event(name, place, year, month, day, hour, minute, 0, 0);
 	}
 }
